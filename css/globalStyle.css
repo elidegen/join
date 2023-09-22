@@ -61,7 +61,7 @@ body {
 .buttonGlobal1 {
     color: white;
     font-weight: 700 !important;
-    border: 0;
+    border: 1px solid #2A3647;
     font-size: 21px;
     height: 51px;
     background: #2A3647;
@@ -95,7 +95,7 @@ body {
 }
 
 .buttonGlobal2:hover {
-    border: 1px solid #29ABE2;
+    border-color: #29ABE2;
     color: #29ABE2;
     transition: 125ms;
 }
@@ -171,7 +171,7 @@ body {
     background: #8f8f8f;
 }
 
-@media(max-width: 1000px){
+@media(max-width: 1000px) {
     .body {
         width: 100vw;
         /* max-width: none; */
