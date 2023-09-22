@@ -1,0 +1,570 @@
+.body {
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+}
+
+body::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
+    content: url("../img/editPencilLightBlue.svg") url("../img/lightBlueBinSmall.svg");
+}
+
+.fadeIn {
+    animation: fadeIn 500ms ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(50%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+.d-block {
+    display: block !important;
+}
+
+#fullscreen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 99;
+}
+
+.contactList {
+    border-top: 1px solid lightgrey;
+    background-color: white;
+    min-width: 300px;
+    max-width: 300px;
+    padding: 15px;
+    z-index: 51;
+    box-shadow: 4px 0 4px 0px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.noContacts {
+    color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.newContactButton {
+    justify-content: space-between;
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px 15px !important;
+}
+
+#renderContacts {
+    flex: 1;
+}
+
+.sortingLetter {
+    border-bottom: 1.5px solid rgba(128, 128, 128, 0.38);
+    font-size: 21px;
+    padding: 16px 0;
+}
+
+.selectContact {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 125ms;
+}
+
+.selectContact:hover {
+    background-color: #29aae213;
+    transition: 125ms;
+}
+
+.miniContactPic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    border: 1px solid #FFFFFF;
+    color: white;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    flex-shrink: 0;
+}
+
+.bigContactPic {
+    width: 114px;
+    height: 114px;
+    background-color: aquamarine;
+    font-size: 35px;
+    box-shadow: 0px 0.5px 2px 1px lightgrey;
+}
+
+.contactInfoPreview {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.contactListName {
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.contactListMail {
+    color: #29abe2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.selected {
+    background-color: #293647 !important;
+    color: white;
+}
+
+.newContactButton img {
+    height: 30px;
+}
+
+/* display contact */
+.exitContact {
+    display: none;
+}
+
+.exitContact:hover {
+    transition: 125ms;
+    content: url("../img/blueCross.svg");
+}
+
+.headline {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: fit-content;
+    padding: 30px;
+}
+
+h1 {
+    font-size: 45px;
+    margin: 0;
+}
+
+.contactsBar {
+    background-color: #29abe2;
+    width: 3px;
+    height: 60px;
+}
+
+#contactDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactNameAndImg {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 32px 32px 32px;
+    gap: 20px;
+    box-sizing: border-box;
+    width: calc(100vw - 602px);
+}
+
+.contactNameAndImg .bigContactPic {
+    height: 90px;
+    width: 90px;
+}
+
+.contactNameAndButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.contactNameAndButtons p {
+    font-weight: 500;
+    margin: 0;
+}
+
+.contactDisplayName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 40px;
+}
+
+.contactDetailButtons {
+    display: flex;
+    justify-content: space-between;
+    width: 240px;
+}
+
+.contactDetailButtons p {
+    font-size: 18px;
+    color: #2a3647;
+}
+
+.contactDetailButtons div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.contactDetailButtons div img {
+    height: 16px;
+}
+
+.contactDetailButtons div:hover p {
+    color: #29abe2;
+}
+
+.editButton:hover #editIcon {
+    content: url("../img/editPencilLightBlue.svg");
+}
+
+.deleteButton:hover #deleteIcon {
+    content: url("../img/lightBlueBinSmall.svg");
+}
+
+.contactInformation {
+    padding: 32px;
+    font-size: 20px;
+}
+
+.contactInformation p {
+    margin: 0;
+}
+
+.contactInformation h4 {
+    margin: 40px 0 10px 0;
+}
+
+.contactInformation a {
+    text-decoration: none;
+    color: #29abe2;
+}
+
+/* popup */
+#popUpWindow {
+    height: fit-content;
+    width: fit-content;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    z-index: 800;
+    display: flex;
+    min-width: 800px;
+}
+
+.closeAddContact {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    z-index: 801;
+}
+
+.addContactForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.blueSide {
+    background-color: #2A3647;
+    border-radius: 16px 0 0 16px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.blueSideContent {
+    margin-top: -50px;
+}
+
+.blueSide img {
+    height: 50px;
+}
+
+.blueSide h1 {
+    font-size: 40px;
+    color: white;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.blueSide p {
+    color: white;
+    margin: 0;
+}
+
+.blueSide p {
+    position: relative;
+}
+
+.blueSide p::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background-color: #43b2f7;
+}
+
+.addContactImg {
+    background-color: lightgrey;
+    padding: 32px;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    box-shadow: 0px 0.5px 2px 1px lightgrey;
+    margin-right: 32px;
+}
+
+.whiteSide {
+    background-color: white;
+    border-radius: 0 16px 16px 0;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.whiteSideContent {
+    display: flex;
+    align-items: center;
+}
+
+.whiteSideContent input {
+    border: 1px solid lightgrey;
+}
+
+.whiteSideContent .bigContactPic {
+    margin-right: 32px;
+}
+
+.overlayButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.overlayButtons p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.overlayButtons img {
+    height: 15px;
+    margin-left: 10px;
+}
+
+.formValidate {
+    margin: 0 0 5px 0 !important;
+    font-size: 14px;
+}
+
+/* responsive popUps */
+@media(max-width: 1000px) {
+    #popUpWindow {
+        display: flex;
+        flex-direction: column;
+        min-width: 340px;
+    }
+
+    .blueSide {
+        border-radius: 16px 16px 0 0;
+        height: 125px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .blueSideContent {
+        margin: 0;
+    }
+
+    .blueSideContent img {
+        display: none;
+    }
+
+    .whiteSide {
+        border-radius: 0 0 16px 16px;
+        height: 350px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .whiteSideContent {
+        flex-direction: column;
+    }
+
+    .whiteSideContent .bigContactPic,
+    .addContactImg {
+        margin: 0;
+        position: absolute;
+        top: 130px;
+    }
+
+    .overlayButtons {
+        justify-content: space-around;
+    }
+
+    .contactNameAndImg {
+        width: calc(100vw - 330px);
+    }
+}
+
+
+/* responsive main site */
+@media(max-width: 800px) {
+    .contactList {
+        width: 100%;
+        max-width: unset;
+        align-items: center;
+    }
+
+    #renderContacts {
+        min-width: 400px;
+    }
+
+    #contactDisplay {
+        display: none;
+        flex: 1;
+    }
+
+    .exitContact {
+        display: block;
+        position: fixed;
+        top: 115px;
+        right: 15px;
+        cursor: pointer;
+        transition: 125ms;
+        height: 30px;
+    }
+
+    .contactNameAndImg {
+        width: 100vw;
+    }
+}
+
+@media(max-width: 450px) {
+    #renderContacts {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .overlayButtons .buttonGlobal1 {
+        width: unset !important;
+    }
+}
+
+@media(max-width: 360px) {
+    #popUpWindow {
+        min-width: 301px;
+    }
+}
+
+@media(max-width: 1100px) {
+    .contactDisplay {
+        flex: 1;
+    }
+
+    .contactsBar {
+        display: none;
+    }
+
+    .headline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .headline2 {
+        margin: 0;
+        position: relative;
+    }
+
+    .headline2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50px;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 2px;
+        background-color: #43b2f7;
+    }
+}
+
+@media(max-width: 500px) {
+    .contactNameAndImg {
+        padding: 15px;
+    }
+
+    .contactNameAndImg .bigContactPic {
+        height: 60px;
+        width: 60px;
+        font-size: 25px;
+    }
+
+    .contactDisplayName {
+        font-size: 30px;
+    }
+
+    .contactDetailButtons {
+        width: 180px;
+    }
+
+    .contactDetailButtons p {
+        font-size: 14px;
+    }
+
+    .contactDetailButtons div {
+        gap: 2px;
+    }
+
+    .contactDetailButtons div img {
+        height: 12px;
+    }
+
+    .headline {
+        padding: 15px;
+    }
+
+    .contactInformation {
+        padding: 15px;
+    }
+}

@@ -1,0 +1,289 @@
+p {
+    margin: 0;
+}
+
+/* Login */
+
+#animationOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f6f7f8;
+    z-index: 98;
+    animation: fadeAway 1.5s forwards;
+}
+
+#msgBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    pointer-events: none;
+}
+
+#joinLogo {
+    height: 70px;
+    width: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-fill-mode: forwards;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 99;
+    background-image: url("../img/logoDark.svg");
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f6f7f8;
+    /*#f6f7f8;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    width: calc(80vw - 60px);
+    max-width: 500px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+    position: relative;
+}
+
+.login h1 {
+    font-size: 45px;
+    margin: 0;
+    position: relative;
+    text-align: center;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #43b2f7;
+}
+
+.loginFields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    min-width: 225px;
+}
+
+.wrongLogin {
+    margin: -15px 0 0 3px;
+    color: red;
+    height: 20px;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rememberMe p {
+    display: flex;
+    gap: 5px;
+}
+
+.rememberMe a {
+    color: #43b2f7;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loginButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.buttonGlobal1,
+.buttonGlobal2 {
+    height: fit-content !important;
+    padding: 10px 15px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signUp {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.backBtn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.forgotPWText {
+    text-align: center;
+}
+
+@keyframes startAnimation {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    30% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        top: 15px;
+        left: 15px;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes fadeAway {
+    0% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        display: flex;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.startAnimation {
+    animation: startAnimation 1.5s ease-in-out;
+}
+
+.fadeIn {
+    animation: fadeIn 1.5s forwards;
+}
+
+.fadeOut {
+    animation: fadeAway 1.5s forwards;
+}
+
+@media(max-width: 500px) {
+    .signUp {
+        top: unset;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #animationOverlay {
+        background-color: #2A3647;
+    }
+
+    .login {
+        gap: 20px;
+        padding: 30px;
+    }
+
+    .wrongLogin {
+        margin-top: -5px;
+        font-size: 12px;
+    }
+
+    .rememberMe {
+        flex-direction: column;
+    }
+
+    .rememberMe input {
+        cursor: pointer;
+    }
+
+    .loginButtons {
+        flex-direction: column;
+    }
+
+    .loginFields {
+        gap: 10px;
+    }
+
+    .backBtn {
+        top: 15px;
+        left: 15px;
+    }
+
+    @keyframes startAnimation {
+        0% {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url("../img/logoLight.svg");;
+        }
+
+        30% {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url("../img/logoLight.svg");
+        }
+
+        100% {
+            top: 15px;
+            left: 15px;
+            transform: translate(0, 0);
+            background-image: url("../img/logoDark.svg");
+        }
+    }
+}
+
+@media(max-height: 700px) {
+    .login {
+        gap: 20px;
+    }
+}
+
+/* Sign Up */

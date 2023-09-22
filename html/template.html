@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../js/mini_backend.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/templates.js"></script>
+    <script src="../js/globalScript.js"></script>
+    <script src="../js/globalVar.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="../img/logoDark.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <img class="logo-mobile" src="../img/logoDark.svg">
+        <p class="d-none-mobile">Kanban Project Management Tool</p>
+        <div class="headerImg">
+            <a href="../html/help.html"><img class="d-none-mobile" id="questionMark" src="../img/questionMarkWhite.svg"></a>
+            <div id="initials" onclick="openDropdown()"></div>
+            <div id="logout" class="d-none" onclick="logout()">
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sideMenu">
+        <a class="legal-notice d-none-mobile" id="side-menu-link4" href="../html/datenschutz.html">
+            <div class="menu-links">
+                <img class="side-menu-img" src="../img/legalNotice.png">
+                <div>Legal notice</div>
+            </div>
+        </a>
+        <img class="d-none-mobile" src="../img/logoLight.svg">
+
+        <div class="menu">
+            <a id="side-menu-link0" href="../html/summary.html">
+                <div class="menu-links">
+                    <img class="side-menu-img" src="../img/summaryIcon.svg">
+                    <div class="side-bar-text">Summary</div>
+                </div>
+            </a>
+
+            <a id="side-menu-link1" href="../html/boardIndex.html">
+                <div class="menu-links">
+                    <img class="side-menu-img" src="../img/boardIcon.svg">
+                    <div class="side-bar-text">Board</div>
+                </div>
+            </a>
+
+            <a id="side-menu-link2" href="../html/addtask.html">
+                <div class="menu-links">
+                    <img class="side-menu-img" src="../img/addTaskIcon.svg">
+                    <div class="side-bar-text">Add Task</div>
+                </div>
+            </a>
+
+
+            <a id="side-menu-link3" href="../html/contact.html">
+                <div class="menu-links">
+                    <img class="side-menu-img" src="../img/contactsIcon.svg">
+                    <div class="side-bar-text">Contacts</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- mobile-dropdown -->
+    <div id="mobileDropDown" class="d-none">
+        <a href="../html/help.html">Help</a>
+        <a href="../html/datenschutz.html">Legal notice</a>
+        <a onclick="logout()">Logout</a>
+    </div>
+
+</body>
+
+</html>
