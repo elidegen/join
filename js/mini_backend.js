@@ -40,6 +40,7 @@ function setURL(url) {
  * payload {JSON | Array} - The payload you want to store
  */
 async function loadJSONFromServer() {
+    console.log('loadjsonfromserver useless');
     let response = await fetch(BASE_SERVER_URL + '/nocors.php?json=database&noache=' + (new Date().getTime()));
     return await response.text();
 }

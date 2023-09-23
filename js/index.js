@@ -1,5 +1,4 @@
 /**
- * init()
  * Initializes the application by performing necessary setup tasks.
  */
 async function init() {
@@ -9,15 +8,13 @@ async function init() {
 }
 
 /**
- * getUserData()
  * Retrieves user data from the server and populates the 'users' variable.
  */
 async function getUserData() {
-    users = JSON.parse(await backend.getItem('users')) || [];
+    users = JSON.parse(await backend.getItem('users'));
 }
 
 /**
- * checkRememberMe()
  * Checks if the "Remember Me" option is enabled and populates the login form if necessary.
  */
 function checkRememberMe() {
@@ -32,7 +29,22 @@ function checkRememberMe() {
 }
 
 /**
- * checkMsg()
+ * Retrieves the email stored in the local storage for the current user.
+ * @returns {string} - The email of the current user retrieved from the local storage.
+ */
+function getLocalStorageEmail() {
+    return localStorage.getItem('currentUser-email');
+}
+
+/**
+ * Retrieves the password stored in the local storage for the current user.
+ * @returns {string} - The password of the current user retrieved from the local storage.
+ */
+function getLocalStoragePassword() {
+    return localStorage.getItem('currentUser-password');
+}
+
+/**
  * Checks if there is a message parameter in the URL and displays it on the page.
  */
 function checkMsg() {
@@ -47,32 +59,26 @@ function checkMsg() {
             document.getElementById("msgBox").classList.add('fadeOut');              
         }, 3000);
         document.getElementById("msgBox").classList.add('d-none');
-
-
-        // let msgBox = document.getElementById("msgBox");
-        // msgBox.classList.add('d-none');
-        // msgBox.innerHTML = `<p id="msg">You have registered successfully!</p>`;
     }
 }
 
 /**
- * getCredentials()
  * Retrieves the user credentials from the input fields.
  * @returns {Object} An object containing the user credentials.
  */
 function getCredentials() {
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    return {
-        name: name,
-        email: email,
-        password: password
-    };
+    console.log('getcredentials is useless');
+    // let name = document.getElementById("name");
+    // let email = document.getElementById("email");
+    // let password = document.getElementById("password");
+    // return {
+    //     name: name,
+    //     email: email,
+    //     password: password
+    // };
 }
 
 /**
- * addUser()
  * Adds a user to the system.
  */
 async function addUser() {
@@ -85,7 +91,6 @@ async function addUser() {
 }
 
 /**
- * createUserError()
  * Displays an error message for creating a user with an invalid password.
  * @param {string} password - The invalid password.
  */
@@ -108,7 +113,6 @@ function createUserError() {
 }
 
 /**
- * createUserSuccess()
  * Redirects the user to the index page with a success message.
  */
 function createUserSuccess() {
@@ -116,7 +120,6 @@ function createUserSuccess() {
 }
 
 /**
- * generateUser()
  * Generates a new user and adds it to the system.
  */
 async function generateUser() {
@@ -125,7 +128,6 @@ async function generateUser() {
 }
 
 /**
- * createUser()
  * Creates a new user object based on the input fields.
  * @returns {Object} A new user object.
  */
@@ -142,7 +144,6 @@ function createUser() {
 }
 
 /**
- * clearForm()
  * Clears the values of the input fields in the form.
  */
 function clearForm() {
@@ -152,7 +153,6 @@ function clearForm() {
 }
 
 /**
- * validateAddUser()
  * Validates the input fields for adding a new user.
  * @returns {boolean} True if all input fields are valid, false otherwise.
  */
@@ -163,7 +163,6 @@ function validateAddUser() {
 }
 
 /**
- * getEmailAndPassword()
  * Retrieves the email and password from the input fields.
  * @returns {Object} An object containing the email and password.
  */
@@ -178,7 +177,6 @@ function getEmailAndPassword() {
 }
 
 /**
- * login()
  * Performs the login operation.
  */
 async function login() {
@@ -194,7 +192,6 @@ async function login() {
 }
 
 /**
- * generateCurrentUser()
  * Generates the current user based on the provided user information.
  * @param {Object} user - The user object containing the user information.
  */
@@ -218,7 +215,6 @@ async function generateCurrentUser(user) {
 }
 
 /**
- * guestLogin()
  * Performs a guest login by setting up a guest account.
  */
 async function guestLogin() {
@@ -227,7 +223,6 @@ async function guestLogin() {
 }
 
 /**
- * setGuestAccount()
  * Sets up a guest account for the current user.
  */
 async function setGuestAccount() {
@@ -248,7 +243,6 @@ async function setGuestAccount() {
 }
 
 /**
- * onSubmit()
  * Handles the form submission event.
  * @param {Event} event - The form submission event.
  */
@@ -265,7 +259,6 @@ async function onSubmit(event) {
 }
 
 /**
- * checkIfUserExists()
  * Checks if the user exists based on the response and performs corresponding animations.
  * @param {any} response - The response received from an action.
  */
@@ -283,7 +276,6 @@ function checkIfUserExists() {
 }
 
 /**
- * action()
  * Performs an action using the provided form data.
  * @param {FormData} formData - The form data to be used in the action.
  * @returns {Promise} - A promise representing the action.
@@ -298,7 +290,6 @@ function action(formData) {
 }
 
 /**
- * onPageLoad()
  * Handles actions to be performed when the page loads.
  */
 async function onPageLoad() {
@@ -307,7 +298,6 @@ async function onPageLoad() {
 }
 
 /**
- * getEmailUrlParameter()
  * Retrieves the value of the "email" parameter from the URL query string.
  * @returns {string|null} - The value of the "email" parameter or null if it doesn't exist.
  */
@@ -319,7 +309,6 @@ function getEmailUrlParameter() {
 }
 
 /**
- * getPasswords()
  * Retrieves the values of the "setPassword" and "confirmPassword" input fields.
  * @returns {Object} - An object containing the values of the "setPassword" and "confirmPassword" fields.
  */
@@ -334,7 +323,6 @@ function getPasswords() {
 }
 
 /**
- * changePassword()
  * Changes the password for the reset user.
  * It retrieves the passwords from the input fields, validates them,
  * updates the password for the reset user, updates the users array,
@@ -352,7 +340,6 @@ async function changePassword() {
 }
 
 /**
- * updateUsersArray()
  * Updates the users array with the updated reset user.
  * It retrieves the user data, finds the user with the matching email,
  * updates the users array with the updated reset user, and saves the updated users array to the backend.
@@ -368,7 +355,6 @@ async function updateUsersArray() {
 }
 
 /**
- * redirectToSummary()
  * Redirects the user to the summary page.
  */
 function redirectToSummary() {
@@ -376,7 +362,6 @@ function redirectToSummary() {
 }
 
 /**
- * redirectToIndex()
  * Redirects the user to the index page.
  */
 function redirectToIndex() {
@@ -384,7 +369,6 @@ function redirectToIndex() {
 }
 
 /**
- * getResetUserFromLocalStorage()
  * Retrieves the reset user from the local storage.
  * It retrieves the stored user data from the local storage
  * and parses it to convert it back to an object.
@@ -396,7 +380,6 @@ function getResetUserFromLocalStorage() {
 }
 
 /**
- * updatePassword()
  * Updates the password of the specified user.
  * @param {object} user - The user object to update.
  * @param {string} newPassword - The new password to set.
@@ -406,7 +389,6 @@ function updatePassword(user, newPassword) {
 }
 
 /**
- * arePasswordsMatching()
  * Checks if the given password and confirm password match.
  * @param {string} password - The password to compare.
  * @param {string} confirmPassword - The confirm password to compare.
@@ -417,7 +399,6 @@ function arePasswordsMatching(password, confirmPassword) {
 }
 
 /**
- * setRememberMe()
  * Sets the remember me data in the local storage.
  * It stores the email and password of the current user in the local storage.
  */
@@ -427,25 +408,6 @@ function setRememberMe() {
 }
 
 /**
- * getLocalStorageEmail()
- * Retrieves the email stored in the local storage for the current user.
- * @returns {string} - The email of the current user retrieved from the local storage.
- */
-function getLocalStorageEmail() {
-    return localStorage.getItem('currentUser-email');
-}
-
-/**
- * getLocalStoragePassword()
- * Retrieves the password stored in the local storage for the current user.
- * @returns {string} - The password of the current user retrieved from the local storage.
- */
-function getLocalStoragePassword() {
-    return localStorage.getItem('currentUser-password');
-}
-
-/**
- * validateUsername()
  * Validates the username to ensure it contains only alphabetic characters and an optional space.
  * @param {string} username - The username to be validated.
  * @returns {boolean} - True if the username is valid, false otherwise.
@@ -456,7 +418,6 @@ function validateUsername(username) {
 }
 
 /**
- * validateEmail()
  * Validates an email address using a regular expression.
  * @param {string} email - The email address to be validated.
  * @returns {boolean} - True if the email address is valid, false otherwise.
@@ -467,7 +428,6 @@ function validateEmail(email) {
 }
 
 /**
- * validatePassword()
  * Validates a password using a regular expression.
  * @param {string} password - The password to be validated.
  * @returns {boolean} - True if the password is valid, false otherwise.
