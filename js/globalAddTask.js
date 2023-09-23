@@ -10,7 +10,7 @@ async function setBackendStatus(status) {
  * pulls status from backend
  */
 async function getBackendStatus() {
-    let statusBackend = backend.getItem('status');
+    let statusBackend = await backend.getItem('status');
     if (statusBackend) {
         newTaskStatus = statusBackend;
     }
