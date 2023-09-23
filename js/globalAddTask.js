@@ -10,7 +10,6 @@ async function setBackendStatus(status) {
  * pulls status from backend
  */
 async function getBackendStatus() {
-    await downloadFromServer();
     let statusBackend = backend.getItem('status');
     if (statusBackend) {
         newTaskStatus = statusBackend;
@@ -71,7 +70,6 @@ async function openPopup(status) {
         document.getElementById('tasks').innerHTML = renderPopup();
         renderCategorys();
         await renderAssignedTo('myAssignedDropdown');
-        await downloadFromServer();
         limitDueDate();
         await setUserContacts();
     }
@@ -98,7 +96,8 @@ async function createTask() {
             'assignedTo': assignedContacts,
             'prio': priorityClicked
         };
-        await setBackendTasks();
+        // await setBackendTasks();
+        await backend.setItem('tasks', JSON.stringify(tasks));
         redirect();
         resetAll();
     }

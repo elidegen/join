@@ -22,7 +22,6 @@ function checkWidth() {
 async function loadContact() {
   await sortContacts();
   createContactRightSide();
-  await downloadFromServer();
   contactList = JSON.parse(await backend.getItem('contactList')) || [];
   renderContactList(contactList);
 }
@@ -144,7 +143,6 @@ function exitContact() {
  * @returns {string} HTML code for the contact information.
  */
 async function sortContacts() {
-  await downloadFromServer();
   contactList = await JSON.parse(await backend.getItem('contactList')) || [];
   contactList.sort((a, b) => {
     if (a.firstName < b.firstName)
@@ -163,7 +161,6 @@ async function sortContacts() {
  * @returns {string} HTML code for the contact list.
  */
 async function sortContactsList() {
-  await downloadFromServer();
   contactList = await JSON.parse(backend.getItem('contactList')) || [];
   await contactList.sort(function (a, b) {
     if (a.firstName < b.firstName)

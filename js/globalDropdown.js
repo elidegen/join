@@ -99,7 +99,6 @@ async function chooseCategory(i) {
  * will get the categorys from backend
  */
 async function getBackend() {
-    await downloadFromServer();
     categories = JSON.parse(await backend.getItem('categories')) || [];
     if (categories.length < 1) {
         categories = [
@@ -135,7 +134,6 @@ async function setBackend() {
  * will render categorys into dropdowns
  */
 async function renderCategorys() {
-    await downloadFromServer();
     await getBackend();
     if (window.location['pathname'] == '/html/addtask.html') {
         id = 'myDropdownATP';
@@ -166,7 +164,6 @@ async function deleteCategory(i, event) {
  * @param {string} id id of dropdown div
  */
 async function renderAssignedTo(id) {
-    await downloadFromServer();
     await setUserContacts();
     document.getElementById(id).innerHTML = '';
     for (let i = 0; i < contactList.length; i++) {
@@ -264,7 +261,6 @@ function chooseContact(i) {
  * @param {json} newContact the edited contact
  */
 async function updateAssigned(index, newContact) {
-    await downloadFromServer();
     await getBackendTasks();
     let oldContact = contactList[index];
     for (let i = 0; i < tasks.length; i++) {

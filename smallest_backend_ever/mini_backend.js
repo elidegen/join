@@ -18,7 +18,6 @@ const backend = {
     }
 };
 window.onload = async function() {
-    downloadFromServer();
 }
 
 async function downloadFromServer() {

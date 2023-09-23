@@ -13,7 +13,6 @@ async function init() {
  * Retrieves user data from the server and populates the 'users' variable.
  */
 async function getUserData() {
-    await downloadFromServer();
     users = JSON.parse(await backend.getItem('users')) || [];
 }
 

@@ -30,7 +30,6 @@ function bgDark(x) {
  * get informations from server
  */
 async function setInitials() {
-  await downloadFromServer();
   currentUser = JSON.parse(await backend.getItem('currentUser')) || [];
   let profile = document.getElementById('initials');
   profile.innerHTML = currentUser.initials.toUpperCase();
@@ -42,7 +41,6 @@ async function setInitials() {
  * greet User with the right name, loaded out of backend 
  */
 async function greetUser() {
-  await downloadFromServer();
   currentUser = JSON.parse(await backend.getItem('currentUser')) || [];
   let profileName = document.getElementById('profileName');
   profileName.innerHTML = currentUser.name;

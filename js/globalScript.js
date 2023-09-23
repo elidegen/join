@@ -2,7 +2,6 @@
  * this function gets the contactlist from backend
  */
 async function setUserContacts() {
-    await downloadFromServer();
     contactList = JSON.parse(await backend.getItem('contactList')) || [];
 }
 
@@ -10,6 +9,7 @@ async function setUserContacts() {
  * pushes tasks in backend
  */
 async function setBackendTasks() {
+    console.log('useless function');
     let arrayAsText = JSON.stringify(tasks);
     await backend.setItem('tasks', arrayAsText);
 }
@@ -18,7 +18,6 @@ async function setBackendTasks() {
  * pulls tasks in backend
  */
 async function getBackendTasks() {
-    await downloadFromServer();
     let arrayAsText = await backend.getItem('tasks');
     if (arrayAsText) {
         tasks = await JSON.parse(arrayAsText);

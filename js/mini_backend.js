@@ -31,14 +31,11 @@ const backend = {
     }
 };
 
-window.onload = async function () {
-    downloadFromServer();
-};
-
 async function downloadFromServer() {
-    setURL('https://elijah-degen.developerakademie.net/smallest_backend_ever');
-    let result = await loadJSONFromServer();
-    jsonFromServer = JSON.parse(result);
+    // setURL('https://elijah-degen.developerakademie.net/smallest_backend_ever');
+    // let result = await loadJSONFromServer();
+    // jsonFromServer = JSON.parse(result);
+    console.log('downloading bla bla');
 }
 
 function setURL(url) {
@@ -49,35 +46,10 @@ function setURL(url) {
  * Loads a JSON or JSON Array to the Server
  * payload {JSON | Array} - The payload you want to store
  */
-
 async function loadJSONFromServer() {
     let response = await fetch(BASE_SERVER_URL + '/nocors.php?json=database&noache=' + (new Date().getTime()));
     return await response.text();
 }
-
-// function loadJSONFromServerOld() {
-//     return new Promise(function (resolve, reject) {
-//         let xhttp = new XMLHttpRequest();
-//         let proxy = determineProxySettings();
-//         let serverURL = proxy + BASE_SERVER_URL + '/nocors.php?json=database&noache=' + (new Date().getTime());
-
-//         xhttp.open('GET', serverURL);
-
-//         xhttp.onreadystatechange = function (oEvent) {
-//             if (xhttp.readyState === 4) {
-//                 if (xhttp.status >= 200 && xhttp.status <= 399) {
-//                     resolve(xhttp.responseText);
-//                 } else {
-//                     reject(xhttp.statusText);
-//                 }
-//             }
-//         };
-
-//         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//         xhttp.send();
-
-//     });
-// }
 
 /**
  * Saves a JSON or JSON Array to the Server
