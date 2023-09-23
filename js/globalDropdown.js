@@ -272,7 +272,7 @@ async function updateAssigned(index, newContact) {
             }
         }
     }
-    await setBackendTasks();
+    await backend.setItem('tasks', JSON.stringify(tasks));
 }
 
 /**

@@ -88,7 +88,7 @@ async function tickSubtask(i, j) {
         tasks[i]['subtasks'][j]['done'] = false;
         document.getElementById(`tick${j}`).classList.add('d-none');
     }
-    await setBackendTasks();
+    await backend.setItem('tasks', JSON.stringify(tasks));
     for (let y = 0; y < tasks.length; y++) {
         renderSubtaskBar(y);
     }
@@ -285,6 +285,6 @@ function saveTask(i) {
 async function resetTask() {
     currentAssigned = [];
     priorityClicked = 'unclicked';
-    await setBackendTasks();
+    await backend.setItem('tasks', JSON.stringify(tasks));
     renderTasks();
 }

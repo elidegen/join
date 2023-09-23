@@ -96,7 +96,7 @@ async function createTask() {
             'assignedTo': assignedContacts,
             'prio': priorityClicked
         };
-        // await setBackendTasks();
+        // await backend.setItem('tasks', JSON.stringify(tasks));
         await backend.setItem('tasks', JSON.stringify(tasks));
         redirect();
         resetAll();

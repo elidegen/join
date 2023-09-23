@@ -120,7 +120,7 @@ function allowDrop(ev) {
  */
 async function moveTo(status) {
     tasks[currentDrag]['status'] = status;
-    await setBackendTasks();
+    await backend.setItem('tasks', JSON.stringify(tasks));
     renderTasks();
     currentDrag = null;
 }
@@ -205,7 +205,7 @@ function contactMatch(contactCompare, contactAssigned) {
  */
 async function deleteTask(x) {
     tasks.splice(x, 1);
-    await setBackendTasks();
+    await backend.setItem('tasks', JSON.stringify(tasks));
     renderTasks();
 }
 
