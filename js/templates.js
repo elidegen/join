@@ -31,7 +31,7 @@ function bgDark(x) {
  */
 async function setInitials() {
   await downloadFromServer();
-  currentUser = JSON.parse(backend.getItem('currentUser')) || [];
+  currentUser = JSON.parse(await backend.getItem('currentUser')) || [];
   let profile = document.getElementById('initials');
   profile.innerHTML = currentUser.initials.toUpperCase();
   profile.style.backgroundColor = currentUser.color;
@@ -43,7 +43,7 @@ async function setInitials() {
  */
 async function greetUser() {
   await downloadFromServer();
-  currentUser = JSON.parse(backend.getItem('currentUser')) || [];
+  currentUser = JSON.parse(await backend.getItem('currentUser')) || [];
   let profileName = document.getElementById('profileName');
   profileName.innerHTML = currentUser.name;
   renderSummaryDates();

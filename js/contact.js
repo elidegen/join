@@ -23,7 +23,7 @@ async function loadContact() {
   await sortContacts();
   createContactRightSide();
   await downloadFromServer();
-  contactList = JSON.parse(backend.getItem('contactList')) || [];
+  contactList = JSON.parse(await backend.getItem('contactList')) || [];
   renderContactList(contactList);
 }
 
@@ -145,7 +145,7 @@ function exitContact() {
  */
 async function sortContacts() {
   await downloadFromServer();
-  contactList = await JSON.parse(backend.getItem('contactList')) || [];
+  contactList = await JSON.parse(await backend.getItem('contactList')) || [];
   contactList.sort((a, b) => {
     if (a.firstName < b.firstName)
       return -1;

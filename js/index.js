@@ -14,7 +14,7 @@ async function init() {
  */
 async function getUserData() {
     await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
+    users = JSON.parse(await backend.getItem('users')) || [];
 }
 
 /**

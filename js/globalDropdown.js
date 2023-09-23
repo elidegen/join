@@ -100,7 +100,7 @@ async function chooseCategory(i) {
  */
 async function getBackend() {
     await downloadFromServer();
-    categories = JSON.parse(backend.getItem('categories')) || [];
+    categories = JSON.parse(await backend.getItem('categories')) || [];
     if (categories.length < 1) {
         categories = [
             {

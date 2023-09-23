@@ -164,7 +164,7 @@ function changeContact(i) {
 async function checkAssigned(i) {
     currentAssigned = [];
     await downloadFromServer();
-    contactList = JSON.parse(backend.getItem('contactList')) || [];
+    contactList = JSON.parse(await backend.getItem('contactList')) || [];
     for (let j = 0; j < tasks[i]['assignedTo'].length; j++) {
         const contactAssigned = tasks[i]['assignedTo'][j];
         for (let y = 0; y < contactList.length; y++) {
