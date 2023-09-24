@@ -292,7 +292,6 @@ async function saveContact() {
 
 /**
  * Creates a new contact object based on the provided name, email, and phone.
- *
  * @param {string} name - The full name of the contact.
  * @param {string} email - The email address of the contact.
  * @param {string} phone - The phone number of the contact.

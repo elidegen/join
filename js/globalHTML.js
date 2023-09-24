@@ -381,7 +381,7 @@ function renderEditContactPopup(i, initials) {
                         </div>
                         <div id="validateEmailEdit" class="formValidate"></div>
                         <div class="globalInput">
-                            <input id="telEdit" type="tel" placeholder="Phone" value="${contactList[i].phone}">
+                            <input id="telEdit" type="number" placeholder="Phone" value="${contactList[i].phone}">
                             <img src="../img/phoneIcon.png" alt="">
                         </div>
                         <div id="validatePhoneEdit" class="formValidate"></div>
@@ -425,7 +425,7 @@ function renderNewContactPopup() {
                         </div>
                         <div id="validateEmail" class="formValidate"></div>
                         <div class="globalInput">
-                            <input id="telAdd" type="tel" placeholder="Phone">
+                            <input id="telAdd" type="number" placeholder="Phone">
                             <img src="../img/phoneIcon.png" alt="">
                         </div>
                         <div id="validatePhone" class="formValidate"></div>
