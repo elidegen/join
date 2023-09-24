@@ -69,7 +69,7 @@ function openDropdown() {
  */
 
 window.onresize = function () {
-  if (window.innerWidth < 1000) document.getElementById('logout').classList.add('d-none');
+  if (window.innerWidth < 1000 && document.getElementById('logout')) document.getElementById('logout').classList.add('d-none');
   if (window.innerWidth > 1000) document.getElementById('mobileDropDown').classList.add('d-none');
 };
 

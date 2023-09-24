@@ -63,22 +63,6 @@ function checkMsg() {
 }
 
 /**
- * Retrieves the user credentials from the input fields.
- * @returns {Object} An object containing the user credentials.
- */
-function getCredentials() {
-    console.log('getcredentials is useless');
-    // let name = document.getElementById("name");
-    // let email = document.getElementById("email");
-    // let password = document.getElementById("password");
-    // return {
-    //     name: name,
-    //     email: email,
-    //     password: password
-    // };
-}
-
-/**
  * Adds a user to the system.
  */
 async function addUser() {
@@ -141,15 +125,6 @@ function createUser() {
         password: password.value,
         color: getRandomColor()
     };
-}
-
-/**
- * Clears the values of the input fields in the form.
- */
-function clearForm() {
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
 }
 
 /**
@@ -252,8 +227,6 @@ async function onSubmit(event) {
     } else {
         event.preventDefault();
         await getUserData();
-        let formData = new FormData(event.target);
-        await action(email.value);
         checkIfUserExists();
     }
 }
@@ -276,21 +249,7 @@ function checkIfUserExists() {
 }
 
 /**
- * Performs an action using the provided form data.
- * @param {FormData} formData - The form data to be used in the action.
- * @returns {Promise} - A promise representing the action.
- */
-function action(formData) {
-    const input = 'https://elijah-degen.developerakademie.net/index/send_mail.php';
-    const requestInit = {
-        method: 'post',
-        body: formData
-    };
-    return fetch(input, requestInit);
-}
-
-/**
- * Handles actions to be performed when the page loads.
+ * Handles actions to be performed when the page loads. forgot password page
  */
 async function onPageLoad() {
     email = getEmailUrlParameter();
