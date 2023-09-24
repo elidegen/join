@@ -30,8 +30,10 @@ async function loadContact() {
  * closes popup and dark background on contacts page
  */
 function closeFullscreenContacts() {
-  document.getElementById('popUpWindow').classList.add('d-none');
-  document.getElementById('fullscreenBackground').classList.add('d-none');
+  document.getElementById('popUpWindow').classList.remove('show');
+  setTimeout(() => {
+    document.getElementById('fullscreenBackground').classList.add('d-none');
+  }, 750);
 }
 
 /**
@@ -39,7 +41,7 @@ function closeFullscreenContacts() {
  */
 function newContactPopup() {
   document.getElementById('fullscreenBackground').classList.remove('d-none');
-  document.getElementById('popUpWindow').classList.remove('d-none');
+  document.getElementById('popUpWindow').classList.add('show');
   document.getElementById('popUpWindow').innerHTML = renderNewContactPopup();
 }
 
@@ -48,7 +50,7 @@ function newContactPopup() {
  */
 function editContactPopup(i) {
   document.getElementById('fullscreenBackground').classList.remove('d-none');
-  document.getElementById('popUpWindow').classList.remove('d-none');
+  document.getElementById('popUpWindow').classList.add('show');
   let initials = contactList[i].firstName.charAt(0) + contactList[i].lastName.charAt(0);
   document.getElementById('popUpWindow').innerHTML = renderEditContactPopup(i, initials);
 }
@@ -131,7 +133,7 @@ function loadContactInfo(i) {
  */
 function exitContact() {
   document.getElementById('contactDisplay').classList.remove('d-block');
-  document.getElementById('contactList').classList.remove('d-none');  
+  document.getElementById('contactList').classList.remove('d-none');
 }
 
 
