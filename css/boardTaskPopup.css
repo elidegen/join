@@ -3,13 +3,14 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(300%, -50%);
     background-color: white;
     width: 300px;
     padding: 48px;
     border-radius: 20px;
     z-index: 100;
     max-height: calc(90vh - 96px);
+    transition: transform 750ms ease-in-out;
     overflow-y: scroll;
 }
 

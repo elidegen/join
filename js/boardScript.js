@@ -180,8 +180,11 @@ function search() {
 function openTask(i) {
     document.getElementById('body').classList.add('overflow-none');
     let fullscreen = document.getElementById('FsTask');
-    fullscreen.classList.remove('d-none');
+    // fullscreen.classList.remove('d-none');
     document.getElementById('fullscreenBackground').classList.remove('d-none');
+    setTimeout(() => {
+        fullscreen.classList.add('show');
+    }, 100);
 
     fullscreen.innerHTML = generateFullscreenTaskHTML(i);
     renderAssignedToFullscreen(i);

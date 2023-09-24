@@ -45,15 +45,16 @@ function limitDueDate() {
 async function closeFullscreen() {
     document.getElementById('tasks').classList.remove('show');
     // document.getElementById('tasks').classList.add('d-none');
-    setTimeout(() => {
-        document.getElementById('fullscreenBackground').classList.add('d-none');        
-    }, 750);
     if (document.getElementById('FsTask')) {
-        document.getElementById('FsTask').classList.add('d-none');
+        document.getElementById('FsTask').classList.remove('show');
+        // document.getElementById('FsTask').classList.add('d-none');
     }
     if (document.getElementById('body')) {
         document.getElementById('body').classList.remove('overflow-none');
     }
+    setTimeout(() => {
+        document.getElementById('fullscreenBackground').classList.add('d-none');        
+    }, 750);
     currentAssigned = [];
     assignedContacts = [];
     if (window.location['pathname'] == '/html/boardIndex.html') {
