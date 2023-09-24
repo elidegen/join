@@ -43,8 +43,11 @@ function limitDueDate() {
  * this function will close the popup
  */
 async function closeFullscreen() {
-    document.getElementById('tasks').classList.add('d-none');
-    document.getElementById('fullscreenBackground').classList.add('d-none');
+    document.getElementById('tasks').classList.remove('show');
+    // document.getElementById('tasks').classList.add('d-none');
+    setTimeout(() => {
+        document.getElementById('fullscreenBackground').classList.add('d-none');        
+    }, 750);
     if (document.getElementById('FsTask')) {
         document.getElementById('FsTask').classList.add('d-none');
     }
@@ -67,6 +70,9 @@ async function openPopup(status) {
     if (window.innerWidth > 1000) {
         document.getElementById('fullscreenBackground').classList.remove('d-none');
         document.getElementById('tasks').classList.remove('d-none');
+        setTimeout(() => {
+            document.getElementById('tasks').classList.add('show');
+        }, 100);
         document.getElementById('tasks').innerHTML = renderPopup();
         renderCategorys();
         await renderAssignedTo('myAssignedDropdown');
