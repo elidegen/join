@@ -103,7 +103,6 @@ async function createTask() {
             'assignedTo': assignedContacts,
             'prio': priorityClicked
         };
-        // await backend.setItem('tasks', JSON.stringify(tasks));
         await backend.setItem('tasks', JSON.stringify(tasks));
         redirect();
         resetAll();
@@ -131,7 +130,7 @@ function resetAll() {
     currentAssigned = [];
     assignedContacts = [];
     currentCategory = null;
-    setBackendStatus(null);
+    setBackendStatus('todoTask');
 }
 
 /**
