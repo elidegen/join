@@ -6,15 +6,6 @@ async function setUserContacts() {
 }
 
 /**
- * pushes tasks in backend
- */
-async function setBackendTasks() {
-    console.log('setbackendtasks obvi useless function');
-    // let arrayAsText = JSON.stringify(tasks);
-    // await backend.setItem('tasks', arrayAsText);
-}
-
-/**
  * pulls tasks from backend
  */
 async function getBackendTasks() {
