@@ -53,10 +53,10 @@ function checkMsg() {
     if (msg == 'success') {
         setTimeout(() => {
             document.getElementById("msgBox").classList.remove('d-none');
-            document.getElementById("msgBox").classList.add('fadeIn');            
+            document.getElementById("msgBox").classList.add('fadeIn');
         }, 1000);
         setTimeout(() => {
-            document.getElementById("msgBox").classList.add('fadeOut');              
+            document.getElementById("msgBox").classList.add('fadeOut');
         }, 3000);
         document.getElementById("msgBox").classList.add('d-none');
     }
@@ -92,7 +92,7 @@ function createUserError() {
     if (!validatePassword(password.value)) {
         document.getElementById('wrongPassword').innerText = "Your password must contain at least 8 letter including a special character!";
     } else {
-        document.getElementById('wrongEmail').innerText = "";
+        document.getElementById('wrongPassword').innerText = "";
     }
 }
 
@@ -132,7 +132,7 @@ function createUser() {
  * @returns {boolean} True if all input fields are valid, false otherwise.
  */
 function validateAddUser() {
-    return validateUsername(name.value) &&
+    return validateUsername(document.getElementById('name').value) &&
         validateEmail(email.value) &&
         validatePassword(password.value);
 }
@@ -227,8 +227,20 @@ async function onSubmit(event) {
     } else {
         event.preventDefault();
         await getUserData();
-        checkIfUserExists();
+        let formData = new FormData(event.target);
+        let response = await sendMail(formData); //formdata ist vermutlich nur das input feld der emailadresse
+        checkIfUserExists(response);
     }
+}
+
+// Sends the password reset email
+function sendMail(formData) {
+    const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
+    const requestInit = {
+        method: 'post',
+        body: formData
+    };
+    return fetch(input, requestInit);
 }
 
 /**
@@ -236,8 +248,7 @@ async function onSubmit(event) {
  * @param {any} response - The response received from an action.
  */
 function checkIfUserExists() {
-    let checkMail = document.getElementById('email').value;
-    let user = users.find(user => user.email == checkMail);
+    let user = users.find(user => user.email == email.value);
     if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         deletePopUp(999);
@@ -372,7 +383,7 @@ function setRememberMe() {
  * @returns {boolean} - True if the username is valid, false otherwise.
  */
 function validateUsername(username) {
-    const regex = /^[a-zA-Z]*([a-zA-Z]+\s*)?$/;
+    const regex = /^[a-zA-Z]+([a-zA-Z]+\s*)?$/;
     return regex.test(username);
 }
 
