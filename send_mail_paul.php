@@ -43,14 +43,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $message = "Hello, \n
         \nFollow this link to reset your JOIN password for your " . $email . " account. \n
-        \nhttps://elijah-degen.developerakademie.net/resetPassword.html?email=" . $email . "\n
+        \nhttps://gruppenarbeit-join-455.developerakademie.net/resetPassword.html?email=" . $email . "\n
         \nIf you didnt ask to reset your password, you can ignore this email. \n
         \nThanks, \n
         \nYour Join Team\n";
         
         $recipient = $email;
         $subject = "Reset your password for JOIN App";
-        $headers = "From:  noreply@elijahdegen";
+        $headers = "From:  noreply@https://gruppenarbeit-join-455.developerakademie.net";
 
         $result = mail($recipient, $subject, $message, $headers);
         print($result);

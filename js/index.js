@@ -221,20 +221,40 @@ async function setGuestAccount() {
  * Handles the form submission event.
  * @param {Event} event - The form submission event.
  */
+// async function onSubmit(event) {
+//     if (!validateEmail(email.value)) {
+//         document.getElementById('wrongEmail').innerText = "Please enter a valid E-Mail Adress!";
+//     } else {
+//         document.getElementById('wrongEmail').innerText = "";
+//         event.preventDefault();
+//         await getUserData();
+//         let formData = new FormData(event.target);
+//         let response = await sendMail(formData); //formdata ist vermutlich nur das input feld der emailadresse
+//         checkIfUserExists(response);
+//     }
+// }
+
+// // Sends the password reset email
+// function sendMail(formData) {
+//     const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
+//     const requestInit = {
+//         method: 'post',
+//         body: formData
+//     };
+//     return fetch(input, requestInit);
+// }
+
+// Sends a password reset email if the user exists
 async function onSubmit(event) {
-    if (!validateEmail(email.value)) {
-        document.getElementById('wrongEmail').innerText = "Please enter a valid E-Mail Adress!";
-    } else {
-        event.preventDefault();
-        await getUserData();
-        let formData = new FormData(event.target);
-        let response = await sendMail(formData); //formdata ist vermutlich nur das input feld der emailadresse
-        checkIfUserExists(response);
-    }
+    event.preventDefault();
+    await getUserData();
+    let formData = new FormData(event.target);
+    let response = await action(formData);
+    checkIfUserExists(response);
 }
 
 // Sends the password reset email
-function sendMail(formData) {
+function action(formData) {
     const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
     const requestInit = {
         method: 'post',
