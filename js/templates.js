@@ -36,17 +36,6 @@ async function setInitials() {
   profile.style.backgroundColor = currentUser.color;
 }
 
-
-/**
- * greet User with the right name, loaded out of backend 
- */
-async function greetUser() {
-  currentUser = JSON.parse(await backend.getItem('currentUser')) || [];
-  let profileName = document.getElementById('profileName');
-  profileName.innerHTML = currentUser.name;
-  renderSummaryDates();
-}
-
 /**
  * opens the dropdown in mobile view, if you click on your initials on the right top corner
  */

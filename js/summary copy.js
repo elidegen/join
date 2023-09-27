@@ -1,23 +1,3 @@
-// NEW SUMMARY JS
-function initSummary() {
-    includeHTML(0);
-    greetUser(); //
-    getBackendTasks(); // 
-    greetingInMobile();
-    renderSummaryDates();
-    getTasksInBoard();
-    getTasksUrgent();
-    getDatesForSummary()
-}
-
-/**
- * greet User with the right name, loaded out of backend 
- */
-async function greetUser() {
-  currentUser = JSON.parse(await backend.getItem('currentUser'));
-  document.getElementById('profileName').innerHTML = currentUser.name;
-}
-
 /**
  * greet user only in mobile view
  */
@@ -104,6 +84,7 @@ async function renderSummaryDates() {
     for (let i = 0; i < status.length; i++) {
         getTasks(status[i]);
     }
+    getTasksInBoard();
 }
 
 
@@ -111,7 +92,9 @@ async function renderSummaryDates() {
  * display tasks from board in summary page
  */
 function getTasksInBoard() {
-    document.getElementById('tasksInBoard').innerHTML = tasks.length;
+    let tasksInBoard = document.getElementById('tasks-in-board');
+    tasksInBoard.innerHTML = tasks.length;
+    getTasksUrgent();
 }
 
 
@@ -170,7 +153,7 @@ function greeting() {
 
 
 /**
- * gets the next coming date in tasks, and displays the next coming deadline.
+ * gets the next coming date in tasks, and diplays the next coming deadline.
  */
 function getDatesForSummary() {
     if (tasks.length >= 1) {
@@ -179,9 +162,10 @@ function getDatesForSummary() {
             datesForSummary.push(`${task['dueDate']}`);
         }
         datesForSummary.sort();
-        let nextDate = datesForSummary[0];
-        document.getElementById('summaryDate').innerHTML = nextDate;
+        let nextDate = null;
+        nextDate = datesForSummary[0];
+        document.getElementById('summary-date').innerHTML = nextDate;
     } else {
-        document.getElementById('summaryDate').innerHTML = 'No Task in Board';
+        document.getElementById('summary-date').innerHTML = 'No Task in Board';
     }
 }

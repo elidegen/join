@@ -4,7 +4,7 @@
 //summary
 function getGreetingHTML(greeting) {
     return `
-    <div class="greeting-animation">
+    <div class="greetingAnimation">
         <h1>${greeting}</h1>
          <span class="blue-text">
             <h1>${currentUser['name']}</h1>

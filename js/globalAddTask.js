@@ -57,7 +57,7 @@ async function closeFullscreen() {
     }, 750);
     currentAssigned = [];
     assignedContacts = [];
-    if (window.location['pathname'] == '/html/boardIndex.html') {
+    if (window.location['pathname'] == '/html/board.html') {
         await renderTasks();
     }
 }
@@ -114,7 +114,7 @@ async function createTask() {
  */
 function redirect() {
     if (window.location['pathname'] == '/html/addtask.html' || window.location['pathname'] == '/html/contact.html') {
-        window.location.href = "../html/boardIndex.html";
+        window.location.href = "../html/board.html";
     }
     else {
         closeFullscreen();

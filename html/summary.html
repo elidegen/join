@@ -22,94 +22,92 @@
     <link rel="icon" type="image/x-icon" href="../img/logoDark.svg">
 </head>
 
-<body onload="includeHTML(0); greetUser(); getBackendTasks(); greetingInMobile()">
+<body onload="initSummary()">
 
     <div w3-include-html="../html/template.html"></div>
 
     <div class="body">
-        <div class="h1">
+        <div class="headerSummary">
             <h1>Summary</h1>
-            <img class="d-none-mobile-sum" src="../img/blueLine.png" alt="">
-            <span class="text-light d-none-mobile">Everything in a nutshell!</span>
+            <img class="d-noneMobile" src="../img/blueLine.png">
+            <span class="text d-noneMobile">Everything in a nutshell!</span>
         </div>
-        <div id="greeting-animation" class="greeting-animation-mobile d-none"></div>
+        <div id="greetingAnimation" class="greetingAnimation-mobile d-none"></div>
 
-        <!--Erste Reihe (drei Container)-->
-        <div class="summary-content">
-            <div class="summary-elements">
-                <div class="summary-child-container">
-                    <a href="../html/boardIndex.html" class="tasks task-little">
-                        <h1 id="tasks-in-board"></h1>
-                        <div class="text-light">Tasks in<br>Board</div>
-                    </a>
-                    <a href="../html/boardIndex.html" class="tasks task-little">
-                        <h1 id="inProgressTask"></h1>
-                        <div class="text-light">Tasks in<br>Progress</div>
-                    </a>
-                    <a href="../html/boardIndex.html" class="tasks task-little">
-                        <h1 id="awaitingFeedbackTask"></h1>
-                        <div class="text-light">Awaiting<br>Feedback</div>
-                    </a>
+        <div class="summaryContent">
+            <div class="tasks">
+
+                <!-- first row -->
+                <div class="first row">
+                    <div class="soloTask">
+                        <div id="tasksInBoard" class="miniTask">
+
+                        </div>
+                        <div class="text">
+                            Tasks in Board
+                        </div>
+                    </div>
+                    <div class="soloTask">
+                        <div id="inProgressTask" class="miniTask">
+
+                        </div>
+                        <div class="text">
+                            Tasks in Progress
+                        </div>
+                    </div>
+                    <div class="soloTask">
+                        <div id="awaitingFeedbackTask" class="miniTask">
+
+                        </div>
+                        <div class="text">
+                            Awaiting Feedback
+                        </div>
+                    </div>
                 </div>
 
-                <!--Zweite Reihe (ein Container)-->
-
-                <div class="summary-child-container">
-                    <a href="../html/boardIndex.html" class="tasks width-100"
-                        style="justify-content: space-around; position: relative;">
-                        <div class="summary-priority">
-                            <img src="../img/urgentButton.png" alt="">
-                            <div style="margin-left: 10px;">
-                                <div>
-                                    <h1 id="urgent"></h1>
-                                </div>
-                                <div class="text-light">Urgent</div>
+                <!-- second row -->
+                <div class="row">
+                    <div class="soloTask bigTask">
+                        <div class="urgent bigTaskWidth">
+                            <img src="../img/urgentButton.png">
+                            <div>
+                                <div id="urgent" class="miniTask"></div>
+                                <div class="text">Urgent</div>
                             </div>
                         </div>
-                        <div class="summary-date">
-                            <div><b id="summary-date">Oktober 16, 2023</b></div>
-                            <div>Upcoming deadline</div>
+                        <div class="greyLine"> </div>
+                        <div class="upcomingDeadline bigTaskWidth">
+                            <div id="summaryDate" class="text"></div>
+                            <div class="text">Upcoming deadline</div>
                         </div>
-                        <img class="grey-line" src="../img/greyLineLong.svg" alt="">
-                    </a>
+                    </div>
                 </div>
 
-                <!--dritte Reihe (zwei Container)-->
-
-                <div class="summary-child-container">
-                    <a href="../html/boardIndex.html" onmouseover="hoverLeftButton()" onmouseout="hoverOffLeftButton()"
-                        class="tasks width-50">
-                        <div class="position-relative">
-                            <img id="button-hover0" src="../img/blueCircle.svg" alt="">
-                            <img id="pencil-hover" class="button-content-img position-btn-left"
-                                src="../img/whitePencil.svg" alt="">
+                <!-- third row -->
+                <div class="row">
+                    <div class="soloTask" id="todoBubble">
+                        <div class="circleIcon">
+                            <img id="todoPencil" src="../img/whitePencil.svg">
                         </div>
-                        <div style="margin-left: 10px;">
-                            <h1 id="todoTask"></h1>
-                            <div class="text-light">To do</div>
+                        <div>
+                            <div id="todoTask" class="miniTask"> </div>
+                            <div class="text"> Todo </div>
                         </div>
-                    </a>
-                    <a href="../html/boardIndex.html" onmouseover="hoverRightButton()"
-                        onmouseout="hoverOffRightButton()" class="tasks width-50">
-                        <div class="position-relative">
-                            <img id="button-hover1" src="../img/blueCircle.svg" alt="">
-                            <img id="check-icon-hover" class="button-content-img position-btn-right"
-                                src="../img/whiteCheck.svg" alt="">
+                    </div>
+                    <div class="soloTask" id="doneBubble">
+                        <div class="circleIcon">
+                            <img id="doneCheck" src="../img/whiteCheck.svg">
                         </div>
-                        <div style="margin-left: 10px;">
-                            <h1 id="doneTask"></h1>
-                            <div class="text-light">Done</div>
+                        <div>
+                            <div id="doneTask" class="miniTask"> </div>
+                            <div class="text"> Done </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
-            <div id="greeting" class="greeting-container d-none-mobile-sum">
-                <div class="greeting">
-                    <span id="greeting-container"></span>
-                    <span class="h1 blue-text">
-                        <h1 id="profileName"></h1>
-                    </span>
-                </div>
+            <div id="greeting">
+                <div id="greetingContainer"></div>
+                <div id="profileName"></div>
             </div>
         </div>
     </div>
