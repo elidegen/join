@@ -1,21 +1,20 @@
 // NEW SUMMARY JS
-function initSummary() {
-    includeHTML(0);
-    greetUser(); //
-    getBackendTasks(); // 
+async function initSummary() {
+    includeHTML(0); //
+    await getCurrentUser(); //
+    await getBackendTasks(); // 
+    getTaskCount(); //
+    getUpcomingDeadline(); //
+    greeting();
     greetingInMobile();
-    renderSummaryDates();
-    getTasksInBoard();
-    getTasksUrgent();
-    getDatesForSummary()
 }
 
 /**
  * greet User with the right name, loaded out of backend 
  */
-async function greetUser() {
-  currentUser = JSON.parse(await backend.getItem('currentUser'));
-  document.getElementById('profileName').innerHTML = currentUser.name;
+async function getCurrentUser() {
+    currentUser = JSON.parse(await backend.getItem('currentUser'));
+    document.getElementById('profileName').innerHTML = currentUser.name;
 }
 
 /**
@@ -25,10 +24,9 @@ function greetingInMobile() {
     let container = document.getElementById('greetingAnimation');
     greetingIsLoaded = localStorage.getItem('greetingLoaded');
     if (greetingIsLoaded == 'false') {
-        animationGreeting(container, greetingIsLoaded);
+        animationGreeting(container);
     }
 }
-
 
 /**
  * play greeting animation 
@@ -42,122 +40,40 @@ function animationGreeting(container) {
     setTimeout(() => container.classList.add('d-none'), 3000);
 }
 
-
 /**
- * changes img (svg)- colors, on "mouse-over" (left)
+ * get counts of how many tasks of certain type are in board
  */
-function hoverLeftButton() {
-    let pencil = document.getElementById(`pencil-hover`);
-    let button1 = document.getElementById(`button-hover0`);
-    button1.src = '../img/whiteCircle.svg';
-    pencil.src = '../img/bluePencil.svg';
-}
-
-
-/**
- * changes img (svg)- colors, on "mouse-off" (right)
- */
-function hoverOffLeftButton() {
-    let pencil = document.getElementById(`pencil-hover`);
-    let button1 = document.getElementById(`button-hover0`);
-    button1.src = '../img/blueCircle.svg';
-    pencil.src = '../img/whitePencil.svg';
-}
-
-
-/**
- * changes img (svg)- colors, on "mouse-over" (right)
- */
-function hoverRightButton() {
-    let button2 = document.getElementById(`button-hover1`);
-    let checkIcon = document.getElementById(`check-icon-hover`);
-    button2.src = '../img/whiteCircle.svg';
-    checkIcon.src = '../img/blueCheck.svg';
-}
-
-
-/**
- * changes img (svg)- colors, on "mouse-off" (left)
- */
-function hoverOffRightButton() {
-    let button2 = document.getElementById(`button-hover1`);
-    let checkIcon = document.getElementById(`check-icon-hover`);
-    button2.src = '../img/blueCircle.svg';
-    checkIcon.src = '../img/whiteCheck.svg';
-}
-
-/**
- * changes img (svg)- colors, on "mouse-off" (left)
- */
-function hoverButton() {
-    document.getElementById(`button-hover1`).src = '../img/blueCircle.svg';
-    document.getElementById(`check-icon-hover`).src = '../img/whiteCheck.svg';
-}
-
-
-/**
- * render information from backend for display "board-update"
- */
-async function renderSummaryDates() {
-    await getBackendTasks();
+async function getTaskCount() {
     let status = ['todoTask', 'awaitingFeedbackTask', 'inProgressTask', 'doneTask'];
     for (let i = 0; i < status.length; i++) {
-        getTasks(status[i]);
+        getTasksCount('status', status[i]);
     }
-}
-
-
-/**
- * display tasks from board in summary page
- */
-function getTasksInBoard() {
     document.getElementById('tasksInBoard').innerHTML = tasks.length;
+    getTasksCount('prio', 'Urgent');
 }
 
-
 /**
- * get tasks with prio "urgent"
+ * returns how many of param are inside loc inside the tasks array
+ * @param {string} loc location in tasks[i] where to search
+ * @param {string} param you searching for the amount of param inside loc
  */
-function getTasksUrgent() {
-    let tasksUrgent = document.getElementById('urgent');
-    let urgent = 0;
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        if (element['prio'] == 'Urgent') {
-            urgent++;
-        }
-    }
-    tasksUrgent.innerHTML = urgent;
-    greeting();
-    getDatesForSummary();
-}
-
-
-/**
- * get priority status of each task, and count to display the number 
- * @param {id} status urgent, middle or low
- */
-function getTasks(status) {
-    let task = document.getElementById(status);
+function getTasksCount(loc, param) {
+    let bubble = document.getElementById(param);
     let count = 0;
     for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        if (element['status'] == status) {
+        if (tasks[i][loc] == param) {
             count++;
         }
     }
-    task.innerHTML = count;
+    bubble.innerHTML = count;
 }
-
 
 /**
  * greet the user different, when its morning or evening..
  */
 function greeting() {
     let transition = document.getElementById('greetingAnimation');
-    let greetingContainer = document.getElementById("greetingContainer");
-    let date = new Date();
-    let hour = date.getHours();
+    let hour = new Date().getHours();
     let greeting;
     if (hour < 12) greeting = "Good morning,";
     else if (hour < 18) greeting = "Good afternoon,";
@@ -165,23 +81,23 @@ function greeting() {
     if (transition) {
         transition.innerHTML = getGreetingHTML(greeting);
     }
-    greetingContainer.innerHTML = greeting;
+    document.getElementById("greetingContainer").innerHTML = greeting;
 }
-
 
 /**
  * gets the next coming date in tasks, and displays the next coming deadline.
  */
-function getDatesForSummary() {
-    if (tasks.length >= 1) {
-        for (let i = 0; i < tasks.length; i++) {
-            const task = tasks[i];
-            datesForSummary.push(`${task['dueDate']}`);
-        }
-        datesForSummary.sort();
-        let nextDate = datesForSummary[0];
-        document.getElementById('summaryDate').innerHTML = nextDate;
-    } else {
-        document.getElementById('summaryDate').innerHTML = 'No Task in Board';
+function getUpcomingDeadline() {
+    tasks.forEach(task => {
+        datesForSummary.push(`${task['dueDate']}`);        
+    });
+    datesForSummary.sort();
+    document.getElementById('summaryDate').innerHTML = datesForSummary[0];
+    if (tasks.length == 0) {
+        document.getElementById('summaryDate').innerHTML = 'No Tasks available';
     }
+}
+
+function redirectToBoard() {
+    window.location.href = "../html/board.html";
 }

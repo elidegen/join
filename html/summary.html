@@ -32,14 +32,14 @@
             <img class="d-noneMobile" src="../img/blueLine.png">
             <span class="text d-noneMobile">Everything in a nutshell!</span>
         </div>
-        <div id="greetingAnimation" class="greetingAnimation-mobile d-none"></div>
+        <div id="greetingAnimation" class="d-none"></div>
 
         <div class="summaryContent">
             <div class="tasks">
 
                 <!-- first row -->
                 <div class="first row">
-                    <div class="soloTask">
+                    <div class="soloTask" onclick="redirectToBoard()">
                         <div id="tasksInBoard" class="miniTask">
 
                         </div>
@@ -47,7 +47,7 @@
                             Tasks in Board
                         </div>
                     </div>
-                    <div class="soloTask">
+                    <div class="soloTask" onclick="redirectToBoard()">
                         <div id="inProgressTask" class="miniTask">
 
                         </div>
@@ -55,7 +55,7 @@
                             Tasks in Progress
                         </div>
                     </div>
-                    <div class="soloTask">
+                    <div class="soloTask" onclick="redirectToBoard()">
                         <div id="awaitingFeedbackTask" class="miniTask">
 
                         </div>
@@ -67,17 +67,17 @@
 
                 <!-- second row -->
                 <div class="row">
-                    <div class="soloTask bigTask">
+                    <div class="soloTask bigTask" onclick="redirectToBoard()">
                         <div class="urgent bigTaskWidth">
                             <img src="../img/urgentButton.png">
                             <div>
-                                <div id="urgent" class="miniTask"></div>
+                                <div id="Urgent" class="miniTask"></div>
                                 <div class="text">Urgent</div>
                             </div>
                         </div>
                         <div class="greyLine"> </div>
                         <div class="upcomingDeadline bigTaskWidth">
-                            <div id="summaryDate" class="text"></div>
+                            <div id="summaryDate" class="text">No Tasks available</div>
                             <div class="text">Upcoming deadline</div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
 
                 <!-- third row -->
                 <div class="row">
-                    <div class="soloTask" id="todoBubble">
+                    <div class="soloTask" id="todoBubble" onclick="redirectToBoard()">
                         <div class="circleIcon">
                             <img id="todoPencil" src="../img/whitePencil.svg">
                         </div>
@@ -94,7 +94,7 @@
                             <div class="text"> Todo </div>
                         </div>
                     </div>
-                    <div class="soloTask" id="doneBubble">
+                    <div class="soloTask" id="doneBubble" onclick="redirectToBoard()">
                         <div class="circleIcon">
                             <img id="doneCheck" src="../img/whiteCheck.svg">
                         </div>
