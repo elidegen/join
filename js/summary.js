@@ -3,14 +3,17 @@ async function initSummary() {
     includeHTML(0); //
     await getCurrentUser(); //
     greeting();
-    // greetingInMobile();
     await getBackendTasks(); // 
-    getTaskCount(); //
+    getTaskNumbers(); //
     getUpcomingDeadline(); //
 }
 
+/**
+ * adjust greeting container if screen size changes
+ */
 window.addEventListener('resize', checkGreetContainer);
 function checkGreetContainer() {
+    console.log('checkgreet');
     if (window.innerWidth > 1200) {
         document.getElementById('greeting').classList.remove('d-none');
     } else {
@@ -29,7 +32,7 @@ async function getCurrentUser() {
 /**
  * get counts of how many tasks of certain type are in board
  */
-async function getTaskCount() {
+async function getTaskNumbers() {
     let status = ['todoTask', 'awaitingFeedbackTask', 'inProgressTask', 'doneTask'];
     for (let i = 0; i < status.length; i++) {
         getTasksCount('status', status[i]);
@@ -58,21 +61,20 @@ function getTasksCount(loc, param) {
  * greet the user different, depending on daytime.
  */
 function greeting() {
+    console.log('greeting');
+    // debugger
     greetingIsLoaded = localStorage.getItem('greetingLoaded');
     document.getElementById("greetingContainer").innerHTML = getDayTime();
-
-    if (window.innerWidth > 1200 || greetingIsLoaded == 'true') {
-        document.getElementById('greeting').classList.add('d-none');
-    }
     if (window.innerWidth < 1201 && greetingIsLoaded == 'false') {
         document.getElementById('greeting').classList.add('greetingAnimation');
         greetingIsLoaded = 'true';
         localStorage.setItem('greetingLoaded', greetingIsLoaded);
-    }
+    } else if(window.innerWidth < 1201 && greetingIsLoaded == 'true') {
+        document.getElementById('greeting').classList.add('d-none');
+    }    
 }
 
-/**
- * 
+/** 
  * @returns greeting according to daytime
  */
 function getDayTime() {
@@ -96,6 +98,9 @@ function getUpcomingDeadline() {
     }
 }
 
+/**
+ * redirects to board
+ */
 function redirectToBoard() {
     window.location.href = "../html/board.html";
 }
