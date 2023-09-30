@@ -50,3 +50,8 @@ function closeDeletePopUp() {
         contactClicked = null;
     }, 750);
 }
+
+function updateFormValidator() {
+    
+    checkForm();
+}

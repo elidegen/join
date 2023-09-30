@@ -53,7 +53,7 @@ async function closeFullscreen() {
         document.getElementById('body').classList.remove('overflow-none');
     }
     setTimeout(() => {
-        document.getElementById('fullscreenBackground').classList.add('d-none');        
+        document.getElementById('fullscreenBackground').classList.add('d-none');
     }, 750);
     currentAssigned = [];
     assignedContacts = [];
@@ -89,6 +89,7 @@ async function openPopup(status) {
  * will check if there is a priority clicked and then create the task
  */
 async function createTask() {
+    formValidatorActive = 1;
     if (checkForm()) {
         if (!newTaskStatus) {
             newTaskStatus = 'todoTask';
@@ -130,6 +131,7 @@ function resetAll() {
     currentAssigned = [];
     assignedContacts = [];
     currentCategory = null;
+    formValidatorActive = 0;
     setBackendStatus('todoTask');
 }
 
@@ -271,3 +273,11 @@ function renderBubble(toManyContacts, j) {
         `;
     }
 }
+
+document.addEventListener('click', function (event) {
+    if (formValidatorActive) {
+        setTimeout(() => {
+            checkForm();
+        }, 100);
+    }
+});

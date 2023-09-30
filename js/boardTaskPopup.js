@@ -45,15 +45,11 @@ function checkFormEdit() {
  * @returns everything clicked ok
  */
 function allValid() {
-    if (inputTitle.value.trim() != ""
+    return inputTitle.value.trim() != ""
         && inputDescription.value.trim() != ""
         && inputDueDate.value != ""
         && priorityClicked != 'unclicked'
-        && currentAssigned.length) {
-        return true;
-    } else {
-        return false;
-    }
+        && currentAssigned.length;
 }
 
 /**
@@ -135,7 +131,7 @@ async function renderAssignedToEdit(id) {
     document.getElementById(id).innerHTML = '';
     for (let i = 0; i < contactList.length; i++) {
         document.getElementById(id).innerHTML += `<a onclick="changeContact(${i})">${contactList[i]['firstName']} ${contactList[i]['lastName']}<img id="checkEdit${i}" src="../img/blackCircleOutline.png"></a>`;
-    }    
+    }
     if (contactList.length == 0) {
         document.getElementById(id).innerHTML += `<a>No contacts available</a>`;
     }

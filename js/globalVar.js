@@ -22,5 +22,6 @@ let categories = [];
 let newCat = 0;
 let contactClicked;
 let newTaskStatus = null;
+let formValidatorActive = 0;
 const storageToken = 'SKJ8MQPWD1GEH3CAS71VTWBXR0RFFCA7K90O1BVC';
 const storageUrl = 'https://remote-storage.developerakademie.org/item';

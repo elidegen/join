@@ -91,15 +91,6 @@
         margin: 0;
     }
 
-    /* #addTaskPageBody {
-        width: 100vw;
-        max-width: none;
-        height: calc(100vh - 200px);
-        margin: 100px 0;
-        padding: 0;
-        overflow: hidden;
-    } */
-
     .centerLine {
         height: 70vh;
     }
@@ -176,11 +167,5 @@
 
     .button1 {
         padding: 13px 10px !important;
-    }
-}
-
-@media(max-width: 1130px) and (min-width: 1000px) {
-    #addTaskPageBody {
-        padding: 64px 0;
     }
 }
