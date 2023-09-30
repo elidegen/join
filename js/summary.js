@@ -2,11 +2,20 @@
 async function initSummary() {
     includeHTML(0); //
     await getCurrentUser(); //
+    greeting();
+    // greetingInMobile();
     await getBackendTasks(); // 
     getTaskCount(); //
     getUpcomingDeadline(); //
-    greeting();
-    greetingInMobile();
+}
+
+window.addEventListener('resize', checkGreetContainer);
+function checkGreetContainer() {
+    if (window.innerWidth > 1200) {
+        document.getElementById('greeting').classList.remove('d-none');
+    } else {
+        document.getElementById('greeting').classList.add('d-none');
+    }
 }
 
 /**
@@ -15,29 +24,6 @@ async function initSummary() {
 async function getCurrentUser() {
     currentUser = JSON.parse(await backend.getItem('currentUser'));
     document.getElementById('profileName').innerHTML = currentUser.name;
-}
-
-/**
- * greet user only in mobile view
- */
-function greetingInMobile() {
-    let container = document.getElementById('greetingAnimation');
-    greetingIsLoaded = localStorage.getItem('greetingLoaded');
-    if (greetingIsLoaded == 'false') {
-        animationGreeting(container);
-    }
-}
-
-/**
- * play greeting animation 
- * @param {element} container greeting animation container 
- */
-function animationGreeting(container) {
-    container.classList.remove('d-none');
-    greetingIsLoaded = 'true';
-    localStorage.setItem('greetingLoaded', greetingIsLoaded);
-    setTimeout(() => container.style.opacity = 0, 1000);
-    setTimeout(() => container.classList.add('d-none'), 3000);
 }
 
 /**
@@ -69,19 +55,31 @@ function getTasksCount(loc, param) {
 }
 
 /**
- * greet the user different, when its morning or evening..
+ * greet the user different, depending on daytime.
  */
 function greeting() {
-    let transition = document.getElementById('greetingAnimation');
-    let hour = new Date().getHours();
-    let greeting;
-    if (hour < 12) greeting = "Good morning,";
-    else if (hour < 18) greeting = "Good afternoon,";
-    else greeting = "Good evening,";
-    if (transition) {
-        transition.innerHTML = getGreetingHTML(greeting);
+    greetingIsLoaded = localStorage.getItem('greetingLoaded');
+    document.getElementById("greetingContainer").innerHTML = getDayTime();
+
+    if (window.innerWidth > 1200 || greetingIsLoaded == 'true') {
+        document.getElementById('greeting').classList.add('d-none');
     }
-    document.getElementById("greetingContainer").innerHTML = greeting;
+    if (window.innerWidth < 1201 && greetingIsLoaded == 'false') {
+        document.getElementById('greeting').classList.add('greetingAnimation');
+        greetingIsLoaded = 'true';
+        localStorage.setItem('greetingLoaded', greetingIsLoaded);
+    }
+}
+
+/**
+ * 
+ * @returns greeting according to daytime
+ */
+function getDayTime() {
+    let hour = new Date().getHours();
+    if (hour < 12) return "Good morning,";
+    else if (hour < 18) return "Good afternoon,";
+    else return "Good evening,";
 }
 
 /**
@@ -89,7 +87,7 @@ function greeting() {
  */
 function getUpcomingDeadline() {
     tasks.forEach(task => {
-        datesForSummary.push(`${task['dueDate']}`);        
+        datesForSummary.push(`${task['dueDate']}`);
     });
     datesForSummary.sort();
     document.getElementById('summaryDate').innerHTML = datesForSummary[0];
