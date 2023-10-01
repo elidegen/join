@@ -20,7 +20,7 @@ function checkWidth() {
  * loads contacts from backend and renders contactlist on the left
  */
 async function loadContact() {
-  await sortContacts();
+  await sortContacts('firstName');
   createContactRightSide();
   contactList = JSON.parse(await backend.getItem('contactList')) || [];
   renderContactList(contactList);
@@ -144,37 +144,19 @@ function exitContact() {
  * @param {string} b.firstName - The first name of another contact object.
  * @returns {string} HTML code for the contact information.
  */
-async function sortContacts() {
+async function sortContacts(param) {
   contactList = await JSON.parse(await backend.getItem('contactList')) || [];
   contactList.sort((a, b) => {
-    if (a.firstName < b.firstName)
+    if (a[param] < b[param])
       return -1;
 
-    if (a.firstName > b.firstName)
+    if (a[param] > b[param])
       return 1;
 
     return 0;
   });
   await backend.setItem('contactList', JSON.stringify(contactList));
 }
-
-/**
- * Generates HTML code for a sorted list of contacts.
- * @returns {string} HTML code for the contact list.
- */
-async function sortContactsList() {
-  contactList = await JSON.parse(backend.getItem('contactList')) || [];
-  await contactList.sort(function (a, b) {
-    if (a.firstName < b.firstName)
-      return -1;
-    if (a.firstName > b.firstName)
-      return 1;
-
-    return 0;
-  });
-  await backend.setItem('contactList', JSON.stringify(contactList));
-}
-
 /**
  * Changes the background color of the selected contact and removes the selection from the previous contact.
  */
@@ -213,6 +195,7 @@ async function saveEditContact(i) {
       phone: contactDetails.tel,
       user: currentUser.email,
       userColor: contactList[i].userColor,
+      id: contactList[i].id
     };
     await checkExistingContact(i, updatedContact);
   }
@@ -283,7 +266,7 @@ function updateContact(existingContactIndex, updatedContact) {
  */
 async function saveContact() {
   if (checkFormAddContact()) {
-    addContactToList(createContactObject(nameAdd.value, emailAdd.value, telAdd.value));
+    addContactToList(await createContactObject(nameAdd.value, emailAdd.value, telAdd.value));
     await saveContactList();
     closeFullscreenContacts();
     loadContact();
@@ -297,18 +280,34 @@ async function saveContact() {
  * @param {string} phone - The phone number of the contact.
  * @returns {object} The newly created contact object.
  */
-function createContactObject(name, email, phone) {
+async function createContactObject(name, email, phone) {
   const firstName = capitalizeFirstLetter(name.split(' ')[0]);
   const lastName = capitalizeFirstLetter(name.split(' ')[1] || '');
-
   return {
     firstName: firstName,
     lastName: lastName,
     email: email,
     phone: phone,
     userColor: getRandomColor(),
-    user: currentUser.email
+    user: currentUser.email,
+    id: await generateContactID()
   };
+}
+
+/**
+ * returns an id for new contact that is unique
+ */
+async function generateContactID() {
+  await sortContacts('id');
+  let contactID = 0;
+  for (let i = 0; i < contactList.length; i++) {
+    if (contactList[i].id == contactID) {
+      contactID = contactList[i].id + 1;
+    } else {
+      return contactID;
+    }
+  }
+  return contactID;
 }
 
 /**
@@ -361,7 +360,7 @@ async function removeContactFromTask(i) {
       }
     });
   });
-  setBackendTasks();
+  backend.setItem('tasks', tasks);
 }
 
 /**
