@@ -248,8 +248,8 @@ async function setGuestAccount() {
 async function onSubmit(event) {
     event.preventDefault();
     await getUserData();
-    // let formData = new FormData(event.target);
-    let response = await action(document.getElementById('email').value);
+    let mailValue = document.getElementById('email').value;
+    let response = await action({ "email": mailValue });
     checkIfUserExists(response);
 }
 

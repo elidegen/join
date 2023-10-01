@@ -263,16 +263,26 @@ function chooseContact(i) {
 async function updateAssigned(index, newContact) {
     await getBackendTasks();
     let oldContact = contactList[index];
-    for (let i = 0; i < tasks.length; i++) {
-        const element1 = tasks[i];
-        for (let y = 0; y < element1['assignedTo'].length; y++) {
-            const element = element1['assignedTo'][y];
-            if (oldContact.firstName == element.firstName && oldContact.lastName == element.lastName) {
-                tasks[i]['assignedTo'][y] = newContact;
-            }
-        }
-    }
+    checkTasksForEditedContact(oldContact, newContact);
     await backend.setItem('tasks', JSON.stringify(tasks));
+}
+
+function checkTasksForEditedContact(oldContact, newContact) {
+    for (let i = 0; i < tasks.length; i++) {
+        checkAssignedForEditedContact(oldContact, newContact, tasks[i]);
+    }
+}
+
+function checkAssignedForEditedContact(oldContact, newContact, task) {
+    for (let y = 0; y < task['assignedTo'].length; y++) {
+        compareContacts(oldContact, newContact, task['assignedTo'][y])
+    }
+}
+
+function compareContacts(oldContact, newContact, assignedContact){
+    if (oldContact.phone == assignedContact.phone) {
+        assignedContact = newContact;
+    }
 }
 
 /**
