@@ -264,8 +264,9 @@ function openNewContact(contactEmail) {
  * @returns {object} The newly created contact object.
  */
 async function createContactObject(name, email, phone) {
-  const firstName = capitalizeFirstLetter(name.split(' ')[0]);
-  const lastName = capitalizeFirstLetter(name.split(' ')[1] || '');
+  let cleanName = clearName(name);
+  const firstName = capitalizeFirstLetter(cleanName.split(' ')[0]);
+  const lastName = capitalizeFirstLetter(cleanName.split(' ')[1] || '');
   return {
     firstName: firstName,
     lastName: lastName,

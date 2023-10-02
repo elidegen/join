@@ -4,7 +4,7 @@
  */
 window.onclick = function (event) {
     if (dropdownClicked(event)) {
-        closeAllDropdowns();
+        closeAllDropdownsExcept();
     }
     dropClicked = false;
 }
@@ -12,10 +12,12 @@ window.onclick = function (event) {
 /**
  * will close all open dropdowns
  */
-function closeAllDropdowns() {
+function closeAllDropdownsExcept(id) {
     let collection = document.getElementsByClassName('dropdown-content');
     for (let i = 0; i < collection.length; i++) {
-        collection[i].classList.add("d-none");
+        if (collection[i].id != id) {
+            collection[i].classList.add("d-none");
+        }
     }
 }
 
@@ -92,7 +94,7 @@ async function chooseCategory(i) {
     if (currentPage == '/html/addtask.html') {
         document.getElementById('myDropdownATP').classList.add('d-none');
     }
-    closeAllDropdowns();
+    closeAllDropdownsExcept();
 }
 
 /**
@@ -205,10 +207,11 @@ function chooseColor(id, color) {
 }
 
 /**
- * will show or hide the dropdown clicked in board
- * @param {string} id the id of clicked dropdown div
+ * will open or close clicked dropdown
+ * @param {string} id of clicked dropdown
  */
 async function showDropdown(id) {
+    await closeAllDropdownsExcept(id);
     document.getElementById(id).classList.toggle("d-none");
     if (!document.getElementById(id).classList.contains("d-none")) {
         dropClicked = true;
@@ -217,24 +220,6 @@ async function showDropdown(id) {
         await renderAssignedToEdit('myAssignedEditDropdown');
         await checkAssigned(index);
         limitDueDate();
-    }
-}
-
-/**
- * will show or hide the dropdown clicked in add task page
- * @param {string} id the id of clicked dropdown div
- */
-function showDropdownATP(id) {
-    document.getElementById(id).classList.toggle("d-none");
-    if (!document.getElementById(id).classList.contains("d-none")) {
-        dropClicked = true;
-    }
-    if (id == 'myDropdownATP') {
-        document.getElementById('myAssignedDropdownATP').classList.add("d-none");
-    }
-    else {
-        document.getElementById('myDropdownATP').classList.add("d-none");
-        addTaskRenderAssignedBubble();
     }
 }
 

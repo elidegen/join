@@ -138,14 +138,25 @@ function validatePhoneDuplicate() {
  * @returns {boolean} - True if the name field is valid, false otherwise.
  */
 function validateName() {
-    if (nameAdd.value.split(" ")[0]
-        && nameAdd.value.split(" ")[1]) {
+    let cleanName = clearName(nameAdd.value);
+    if (cleanName.split(" ").length == 2) {
         document.getElementById('validateName').innerHTML = '';
         return true;
-    } else {
+    } else if (cleanName.split(" ").length > 2) {
+        document.getElementById('validateName').innerHTML = 'Please enter ONLY first and last name!';
+        return false;
+    } else if (cleanName.split(" ").length < 2) {
         document.getElementById('validateName').innerHTML = 'Please enter first and last name!';
         return false;
     }
+}
+
+/**
+ * removes unnessecary whitespaces from a "dirty" string and returns a clean string
+ */
+function clearName(dirtyName) {    
+    let nameTrim = dirtyName.trim();
+    return nameTrim.replace(/\s+/g, ' ');
 }
 
 /**
