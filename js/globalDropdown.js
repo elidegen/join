@@ -267,21 +267,30 @@ async function updateAssigned(index, newContact) {
     await backend.setItem('tasks', JSON.stringify(tasks));
 }
 
+/**
+ * will iterate every task and provide index of task to next function
+ */
 function checkTasksForEditedContact(oldContact, newContact) {
     for (let i = 0; i < tasks.length; i++) {
-        checkAssignedForEditedContact(oldContact, newContact, tasks[i]);
+        checkAssignedForEditedContact(oldContact, newContact, i);
     }
 }
 
-function checkAssignedForEditedContact(oldContact, newContact, task) {
-    for (let y = 0; y < task['assignedTo'].length; y++) {
-        compareContacts(oldContact, newContact, task['assignedTo'][y])
+/**
+ * will iterate every assigned contact of task[i] and provide index to next function
+ */
+function checkAssignedForEditedContact(oldContact, newContact, i) {
+    for (let y = 0; y < tasks[i]['assignedTo'].length; y++) {
+        compareContacts(oldContact, newContact, i, y);
     }
 }
 
-function compareContacts(oldContact, newContact, assignedContact){
-    if (oldContact.phone == assignedContact.phone) {
-        assignedContact = newContact;
+/**
+ * will compare the unique id of the old contact with the assigned contact and update the assigned contact if id is matching
+ */
+function compareContacts(oldContact, newContact, i, y){
+    if (oldContact.id == tasks[i]['assignedTo'][y].id) {
+        tasks[i]['assignedTo'][y] = newContact;
     }
 }
 
