@@ -3,7 +3,7 @@
  */
 function init() {
   includeHTML(3);
-  loadContact();
+  loadContactList();
 }
 
 /**
@@ -19,7 +19,7 @@ function checkWidth() {
 /**
  * loads contacts from backend and renders contactlist on the left
  */
-async function loadContact() {
+async function loadContactList() {
   await sortContacts('firstName');
   createContactRightSide();
   contactList = JSON.parse(await backend.getItem('contactList')) || [];
@@ -56,55 +56,26 @@ function editContactPopup(i) {
 }
 
 /**
- * generates list of contacts on the left side of screen
+ * renders contactList depending on if there are contacts available
  */
 function renderContactList(contactList) {
-  if (contactList.length > 0) {
-    let currentLetter = "";
-    let html = "";
-    for (let i = 0; i < contactList.length; i++) {
-      let contact = contactList[i];
-      let firstLetter = contact.firstName[0];
-      let result = createContactListSections(firstLetter, currentLetter, html);
-      currentLetter = result.currentLetter;
-      html = result.html;
-      html = createContactListElements(i, contact, html);
-    }
-    document.getElementById('renderContacts').innerHTML = html;
-  } else {
-    document.getElementById('renderContacts').innerHTML = noContactsHTML();
-  }
+  document.getElementById('renderContacts').innerHTML = contactList.length > 0 ? generateContactList() : noContactsHTML();
 }
 
 /**
- * creates a single section of contact list
+ * @returns html code for contactList section
  */
-function createContactListSections(firstLetter, currentLetter, html) {
-  if (firstLetter.toLowerCase() !== currentLetter.toLowerCase()) {
-    currentLetter = firstLetter;
-    html += /*html*/`
-          <div class="contactListSide">
-            <div class="sortingLetter">${firstLetter.toUpperCase()}</div>
-            <span class="dividingBar"></span>
-          </div>
-        `;
+function generateContactList() {
+  let currentLetter = "";
+  let html = "";
+  for (let i = 0; i < contactList.length; i++) {
+    let contact = contactList[i];
+    let firstLetter = contact.firstName[0];
+    let letterSectionJSON = createContactListSections(firstLetter, currentLetter, html);
+    currentLetter = letterSectionJSON.currentLetter;
+    html = letterSectionJSON.html;
+    html = createContactListElements(i, contact, html);
   }
-  return { currentLetter, html };
-}
-
-/**
- * creates the single contact in the contact list
- */
-function createContactListElements(i, contact, html) {
-  html += /*html*/`
-    <div class="selectContact" id="contact-${i}" onclick="loadContactInfo(${i})">
-      <div id="picImg${i}" class="miniContactPic" style="background-color: ${contact['userColor']}">${contact.firstName[0].charAt(0).toUpperCase()}${contact.lastName[0].charAt(0).toUpperCase()}</div>
-      <div class="contactInfoPreview">
-        <div class="contactListName">${contact.firstName} ${contact.lastName}</div>
-        <div class="contactListMail">${contact.email}</div>
-      </div>
-    </div>
-  `;
   return html;
 }
 
@@ -226,7 +197,7 @@ async function checkExistingContact(i, updatedContact) {
   updateContact(i, updatedContact);
   await backend.setItem('contactList', JSON.stringify(contactList));
   closeFullscreenContacts();
-  await loadContact();
+  await loadContactList();
   loadContactInfo(generateExistingContactIndex(updatedContact));
 }
 
@@ -269,7 +240,19 @@ async function saveContact() {
     addContactToList(await createContactObject(nameAdd.value, emailAdd.value, telAdd.value));
     await saveContactList();
     closeFullscreenContacts();
-    loadContact();
+    await loadContactList();
+    openNewContact(emailAdd.value);
+  }
+}
+
+/**
+ * opens new created contact by comparing email of new contact
+ */
+function openNewContact(contactEmail) {
+  for (let i = 0; i < contactList.length; i++) {
+    if(contactList[i].email == contactEmail){
+      loadContactInfo(i);
+    }    
   }
 }
 
@@ -342,7 +325,7 @@ async function deleteContact(i) {
   await removeContactFromTask(i);
   contactList.splice(i, 1);
   await backend.setItem('contactList', JSON.stringify(contactList));
-  loadContact();
+  loadContactList();
   contactClicked = null;
   exitContact();
 }

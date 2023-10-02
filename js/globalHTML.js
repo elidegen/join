@@ -611,3 +611,35 @@ function noContactsHTML() {
         </div>
     `;
 }
+
+/**
+ * creates the single contact in the contact list
+ */
+function createContactListElements(i, contact, html) {
+  html += /*html*/`
+    <div class="selectContact" id="contact-${i}" onclick="loadContactInfo(${i})">
+      <div id="picImg${i}" class="miniContactPic" style="background-color: ${contact['userColor']}">${contact.firstName[0].charAt(0).toUpperCase()}${contact.lastName[0].charAt(0).toUpperCase()}</div>
+      <div class="contactInfoPreview">
+        <div class="contactListName">${contact.firstName} ${contact.lastName}</div>
+        <div class="contactListMail">${contact.email}</div>
+      </div>
+    </div>
+  `;
+  return html;
+}
+
+/**
+ * creates a single section of contact list and adds to html variable
+ */
+function createContactListSections(firstLetter, currentLetter, html) {
+  if (firstLetter.toLowerCase() !== currentLetter.toLowerCase()) {
+    currentLetter = firstLetter;
+    html += /*html*/`
+          <div class="contactListSide">
+            <div class="sortingLetter">${firstLetter.toUpperCase()}</div>
+            <span class="dividingBar"></span>
+          </div>
+        `;
+  }
+  return { currentLetter, html };
+}

@@ -386,6 +386,7 @@ h1 {
 .overlayButtons p {
     margin: 0;
     font-size: 18px;
+    white-space: nowrap;
 }
 
 .overlayButtons img {
@@ -495,6 +496,10 @@ h1 {
 @media(max-width: 360px) {
     #popUpWindow {
         min-width: 301px;
+    }
+
+    .overlayButtons p {
+        white-space: unset;
     }
 }
 

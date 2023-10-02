@@ -281,16 +281,9 @@ function checkTasksForEditedContact(oldContact, newContact) {
  */
 function checkAssignedForEditedContact(oldContact, newContact, i) {
     for (let y = 0; y < tasks[i]['assignedTo'].length; y++) {
-        compareContacts(oldContact, newContact, i, y);
-    }
-}
-
-/**
- * will compare the unique id of the old contact with the assigned contact and update the assigned contact if id is matching
- */
-function compareContacts(oldContact, newContact, i, y){
-    if (oldContact.id == tasks[i]['assignedTo'][y].id) {
-        tasks[i]['assignedTo'][y] = newContact;
+        if (contactMatch(oldContact, tasks[i]['assignedTo'][y])) {
+            tasks[i]['assignedTo'][y] = newContact;
+        }
     }
 }
 

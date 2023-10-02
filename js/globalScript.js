@@ -51,7 +51,10 @@ function closeDeletePopUp() {
     }, 750);
 }
 
-function updateFormValidator() {
-    
-    checkForm();
+/**
+ * checks if the botch contacts match
+ * @returns true if match
+ */
+function contactMatch(contactOne, contactTwo) {
+    return contactOne.id == contactTwo.id;
 }

@@ -194,14 +194,6 @@ function openTask(i) {
 }
 
 /**
- * checks if the botch contacts match
- * @returns true if match
- */
-function contactMatch(contactCompare, contactAssigned) {
-    return contactCompare['firstName'] == contactAssigned['firstName'] && contactCompare['lastName'] == contactAssigned['lastName'];
-}
-
-/**
  * this function will delete a chosen task
  * @param {number} x index of task
  * @param {*} event 

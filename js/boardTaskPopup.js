@@ -154,7 +154,7 @@ function changeContact(i) {
 }
 
 /**
- * this function checks which contacts are assigned to chosen task and will mark them in the dropdown list
+ * iterates assigned contacts to certain tasks and calls function to show them in minitask view
  * @param {number} i index of task
  */
 async function checkAssigned(i) {
@@ -162,16 +162,21 @@ async function checkAssigned(i) {
     contactList = JSON.parse(await backend.getItem('contactList')) || [];
     for (let j = 0; j < tasks[i]['assignedTo'].length; j++) {
         const contactAssigned = tasks[i]['assignedTo'][j];
-        for (let y = 0; y < contactList.length; y++) {
-            if (contactMatch(contactList[y], contactAssigned)) {
-                document.getElementById(`checkEdit${y}`).src = '../img/blackCircle.png';
-                currentAssigned.push(contactAssigned);
-                break;
-            } else {
-                if (y == contactList.length - 1) {
-                    tasks[i]['assignedTo'].splice(j, 1);
-                }
-            }
+        checkIfAssigned(contactAssigned, i, j);
+    }
+}
+
+/**
+ * this function checks if contact is assigned to task[i] and will mark it in the dropdown list
+ */
+function checkIfAssigned(contactAssigned, i, j) {
+    for (let y = 0; y < contactList.length; y++) {
+        if (contactMatch(contactList[y], contactAssigned)) {
+            document.getElementById(`checkEdit${y}`).src = '../img/blackCircle.png';
+            currentAssigned.push(contactAssigned);
+            break;
+        } else if (y == contactList.length - 1) {
+            tasks[i]['assignedTo'].splice(j, 1);
         }
     }
 }
