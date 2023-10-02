@@ -32,8 +32,13 @@ function bgDark(x) {
 async function setInitials() {
   currentUser = JSON.parse(await backend.getItem('currentUser')) || [];
   let profile = document.getElementById('initials');
-  profile.innerHTML = currentUser.initials.toUpperCase();
-  profile.style.backgroundColor = currentUser.color;
+
+  let firstName = (currentUser.name.split(' ')[0]).charAt(0).toUpperCase();
+  profile.innerHTML = firstName;
+  if (currentUser.name.split(' ')[1]) {
+    let lastName = (currentUser.name.split(' ')[1]).charAt(0).toUpperCase();
+    profile.innerHTML += lastName;
+  }
 }
 
 /**

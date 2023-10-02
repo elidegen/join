@@ -50,7 +50,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         
         $recipient = $email;
         $subject = "Reset your password for JOIN App";
-        $headers = "From:  noreply@elijahdegen";
+        $headers = "From:  noreply@https://elijah-degen.developerakademie.net";
 
         $result = mail($recipient, $subject, $message, $headers);
         print($result);

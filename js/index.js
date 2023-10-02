@@ -107,23 +107,22 @@ function createUserSuccess() {
  * Generates a new user and adds it to the system.
  */
 async function generateUser() {
-    users.push(createUser());
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    users.push(createUser(name, email, password));
     await backend.setItem('users', JSON.stringify(users));
 }
 
 /**
- * Creates a new user object based on the input fields.
+ * Creates a new user object.
  * @returns {Object} A new user object.
  */
-function createUser() {
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
+function createUser(name, email, password) {
     return {
         name: name.value,
         email: email.value,
         password: password.value,
-        color: getRandomColor()
     };
 }
 
@@ -158,7 +157,7 @@ async function login() {
     const loginData = getEmailAndPassword();
     let user = users.find(user => user.email == loginData.email && user.password == loginData.password);
     if (user) {
-        await generateCurrentUser(user);
+        await setCurrentUser(user);
         redirectToSummary();
         setRememberMe();
     } else {
@@ -170,20 +169,11 @@ async function login() {
  * Generates the current user based on the provided user information.
  * @param {Object} user - The user object containing the user information.
  */
-async function generateCurrentUser(user) {
-    const loginData = getEmailAndPassword();
-    let name = user.name;
-    let color = user.color;
-    let stringToSplit = name.split(" ");
-    let seperatedLetters = stringToSplit.map(word => word[0]);
-    let combinedLetters = seperatedLetters.join("");
+async function setCurrentUser(user) {
     currentUser = {
         name: user.name,
-        email: loginData.email,
-        password: loginData.password,
-        initials: combinedLetters,
-        color: color,
-        contacts: contactList
+        email: user.email,
+        password: user.password
     };
     await backend.setItem('currentUser', JSON.stringify(currentUser));
     localStorage.setItem('greetingLoaded', 'false');
@@ -193,6 +183,7 @@ async function generateCurrentUser(user) {
  * Performs a guest login by setting up a guest account.
  */
 async function guestLogin() {
+    
     await setGuestAccount();
     redirectToSummary();
 }
@@ -210,7 +201,6 @@ async function setGuestAccount() {
         email: "guest",
         password: "",
         initials: combinedLetters,
-        color: '#2AAAE2',
         contacts: contactList
     };
     localStorage.setItem('greetingLoaded', 'false');

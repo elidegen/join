@@ -161,16 +161,23 @@ function unTilt(i) {
  * this function will render the tasks that are matching with your search
  */
 function search() {
-    let input = document.getElementById('searchInput').value;
+    let input = (document.getElementById('searchInput').value).toLowerCase();
     empty('todoTask');
     empty('inProgressTask');
     empty('awaitingFeedbackTask');
     empty('doneTask');
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['title'].includes(input) || tasks[i]['description'].includes(input)) {
+        if (searchSuccess(i, input)) {
             renderTask(i);
         }
     }
+}
+
+/**
+ * @returns if your search input is matching with either title description or category of task
+ */
+function searchSuccess(i, input){
+    return tasks[i]['title'].toLowerCase().includes(input) || tasks[i]['description'].toLowerCase().includes(input) || tasks[i]['category']['name'].toLowerCase().includes(input);
 }
 
 /**
