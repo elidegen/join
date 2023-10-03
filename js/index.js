@@ -54,15 +54,35 @@ function checkMsg() {
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('msg');
     if (msg == 'success') {
-        setTimeout(() => {
-            document.getElementById("msgBox").classList.remove('d-none');
-            document.getElementById("msgBox").classList.add('fadeIn');
-        }, 1000);
-        setTimeout(() => {
-            document.getElementById("msgBox").classList.add('fadeOut');
-        }, 3000);
-        document.getElementById("msgBox").classList.add('d-none');
+        signUpSuccessMsg();
     }
+    if (msg == 'successPW') {
+        passwordResetSuccess();
+    }
+}
+
+function signUpSuccessMsg() {
+    document.getElementById('msg').innerHTML = 'You have registered successfully!';
+    setTimeout(() => {
+        document.getElementById("msgBox").classList.remove('d-none');
+        document.getElementById("msgBox").classList.add('fadeIn');
+    }, 1000);
+    setTimeout(() => {
+        document.getElementById("msgBox").classList.add('fadeOut');
+    }, 3000);
+    document.getElementById("msgBox").classList.add('d-none');
+}
+
+function passwordResetSuccess() {
+    document.getElementById('msg').innerHTML = 'Your password has been successfully changed!';
+    setTimeout(() => {
+        document.getElementById("msgBox").classList.remove('d-none');
+        document.getElementById("msgBox").classList.add('fadeIn');
+    }, 1000);
+    setTimeout(() => {
+        document.getElementById("msgBox").classList.add('fadeOut');
+    }, 3000);
+    document.getElementById("msgBox").classList.add('d-none');
 }
 
 /**
@@ -378,5 +398,5 @@ function redirectToSummary() {
  * Redirects the user to the index page.
  */
 function redirectToIndex() {
-    window.location.href = '../index.html';
+    window.location.href = '../index.html?msg=successPW';
 }
