@@ -1,3 +1,6 @@
+let FPWemail;
+let FPWuser;
+
 /**
  * Initializes the application by performing necessary setup tasks.
  */
@@ -262,8 +265,8 @@ function checkIfUserExists() {
  * Handles actions to be performed when the page loads. forgot password page
  */
 async function onPageLoad() {
-    email = getEmailUrlParameter();
-    users = await getUserData();
+    getUserData();
+    FPWemail = getEmailUrlParameter();
 }
 
 /**
@@ -278,20 +281,6 @@ function getEmailUrlParameter() {
 }
 
 /**
- * Retrieves the values of the "setPassword" and "confirmPassword" input fields.
- * @returns {Object} - An object containing the values of the "setPassword" and "confirmPassword" fields.
- */
-function getPasswords() {
-    const setPassword = document.getElementById('setPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-
-    return {
-        setPassword: setPassword,
-        confirmPassword: confirmPassword
-    };
-}
-
-/**
  * Changes the password for the reset user.
  * It retrieves the passwords from the input fields, validates them,
  * updates the password for the reset user, updates the users array,
@@ -300,12 +289,28 @@ function getPasswords() {
 async function changePassword() {
     const passwords = getPasswords();
     let resetUser = getResetUserFromLocalStorage();
-
-    if (arePasswordsMatching(passwords.setPassword, passwords.confirmPassword)) {
-        updatePassword(resetUser, passwords.confirmPassword);
-        updateUsersArray();
-        redirectToIndex();
+    if (validatePassword(passwords.setPassword) && validatePassword(passwords.confirmPassword)) {
+        if (arePasswordsMatching(passwords.setPassword, passwords.confirmPassword)) {
+            resetUser.password = passwords.confirmPassword;
+            await updateUsersArray(resetUser);
+            redirectToIndex();
+        } else {
+            document.getElementById('loginFail').innerHTML = 'Your passwords do not match!';
+        }
+    } else {
+        document.getElementById('loginFail').innerHTML = 'Your password must contain at least 8 letter including a special character!';
     }
+}
+
+/**
+ * Retrieves the values of the "setPassword" and "confirmPassword" input fields.
+ * @returns {Object} - An object containing the values of the "setPassword" and "confirmPassword" fields.
+ */
+function getPasswords() {
+    return {
+        setPassword: setPassword.value,
+        confirmPassword: confirmPassword.value
+    };
 }
 
 /**
@@ -313,28 +318,13 @@ async function changePassword() {
  * It retrieves the user data, finds the user with the matching email,
  * updates the users array with the updated reset user, and saves the updated users array to the backend.
  */
-async function updateUsersArray() {
-    await getUserData();
+async function updateUsersArray(resetUser) {
     let user = users.find(user => user.email == resetUser.email);
     if (user) {
         let index = users.indexOf(user);
         users.splice(index, 1, resetUser);
         await backend.setItem('users', JSON.stringify(users));
     }
-}
-
-/**
- * Redirects the user to the summary page.
- */
-function redirectToSummary() {
-    window.location.href = '../html/summary.html';
-}
-
-/**
- * Redirects the user to the index page.
- */
-function redirectToIndex() {
-    window.location.href = '../index.html';
 }
 
 /**
@@ -346,15 +336,6 @@ function redirectToIndex() {
 function getResetUserFromLocalStorage() {
     const storedUser = localStorage.getItem('user');
     return JSON.parse(storedUser);
-}
-
-/**
- * Updates the password of the specified user.
- * @param {object} user - The user object to update.
- * @param {string} newPassword - The new password to set.
- */
-function updatePassword(user, newPassword) {
-    user.password = newPassword;
 }
 
 /**
@@ -384,4 +365,18 @@ function renderForgotPw() {
 // Function to render the sign-up page.
 function renderSignUp() {
     document.getElementById('container').innerHTML = signUpHTML();
+}
+
+/**
+ * Redirects the user to the summary page.
+ */
+function redirectToSummary() {
+    window.location.href = '../html/summary.html';
+}
+
+/**
+ * Redirects the user to the index page.
+ */
+function redirectToIndex() {
+    window.location.href = '../index.html';
 }
