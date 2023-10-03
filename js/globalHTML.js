@@ -584,7 +584,7 @@ function signUpHTML() {
             <h1>Sign up</h1>
             <div class="loginFields">
                 <div class="globalInput">
-                    <input id="name" type="text" placeholder="Name"> <img src="../img/nameIcon.png">
+                    <input id="name" type="text" placeholder="Username"> <img src="../img/nameIcon.png">
                 </div>
                 <div id="wrongName" class="wrongLogin"></div>
                 <div class="globalInput">

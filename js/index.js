@@ -183,28 +183,8 @@ async function setCurrentUser(user) {
  * Performs a guest login by setting up a guest account.
  */
 async function guestLogin() {
-    
-    await setGuestAccount();
+    await setCurrentUser(guest);
     redirectToSummary();
-}
-
-/**
- * Sets up a guest account for the current user.
- */
-async function setGuestAccount() {
-    let guestName = "Dear Guest";
-    let stringToSplit = guestName.split(" ");
-    let seperatedLetters = stringToSplit.map(word => word[0]);
-    let combinedLetters = seperatedLetters.join("");
-    currentUser = {
-        name: guestName,
-        email: "guest",
-        password: "",
-        initials: combinedLetters,
-        contacts: contactList
-    };
-    localStorage.setItem('greetingLoaded', 'false');
-    await backend.setItem('currentUser', JSON.stringify(currentUser));
 }
 
 /**
@@ -394,7 +374,7 @@ function setRememberMe() {
  */
 function validateUsername(username) {
     const regex = /^[a-zA-Z]+([a-zA-Z]+\s*)?$/;
-    return regex.test(username);
+    return regex.test(username.trim());
 }
 
 /**
