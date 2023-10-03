@@ -1,6 +1,3 @@
-let FPWemail;
-let FPWuser;
-
 /**
  * Initializes the application by performing necessary setup tasks.
  */
@@ -54,27 +51,18 @@ function checkMsg() {
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('msg');
     if (msg == 'success') {
-        signUpSuccessMsg();
+        document.getElementById('msg').innerHTML = 'You have registered successfully!';
     }
     if (msg == 'successPW') {
-        passwordResetSuccess();
+        document.getElementById('msg').innerHTML = 'Your password has been successfully changed!';
     }
+    successMsg();
 }
 
-function signUpSuccessMsg() {
-    document.getElementById('msg').innerHTML = 'You have registered successfully!';
-    setTimeout(() => {
-        document.getElementById("msgBox").classList.remove('d-none');
-        document.getElementById("msgBox").classList.add('fadeIn');
-    }, 1000);
-    setTimeout(() => {
-        document.getElementById("msgBox").classList.add('fadeOut');
-    }, 3000);
-    document.getElementById("msgBox").classList.add('d-none');
-}
-
-function passwordResetSuccess() {
-    document.getElementById('msg').innerHTML = 'Your password has been successfully changed!';
+/**
+ * animates the success message
+ */
+function successMsg() {
     setTimeout(() => {
         document.getElementById("msgBox").classList.remove('d-none');
         document.getElementById("msgBox").classList.add('fadeIn');
@@ -279,25 +267,6 @@ function checkIfUserExists() {
         document.getElementById('confirmationPopUp').innerHTML = 'No user registered with this email';
         return false;
     }
-}
-
-/**
- * Handles actions to be performed when the page loads. forgot password page
- */
-async function onPageLoad() {
-    getUserData();
-    FPWemail = getEmailUrlParameter();
-}
-
-/**
- * Retrieves the value of the "email" parameter from the URL query string.
- * @returns {string|null} - The value of the "email" parameter or null if it doesn't exist.
- */
-function getEmailUrlParameter() {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const email = urlParams.get('email');
-    return email;
 }
 
 /**
