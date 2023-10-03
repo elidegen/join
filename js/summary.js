@@ -13,9 +13,9 @@ async function initSummary() {
  */
 window.addEventListener('resize', checkGreetContainer);
 function checkGreetContainer() {
-    console.log('checkgreet');
     if (window.innerWidth > 1200) {
         document.getElementById('greeting').classList.remove('d-none');
+        document.getElementById('greeting').classList.remove('greetingAnimation');
     } else {
         document.getElementById('greeting').classList.add('d-none');
     }
@@ -61,8 +61,6 @@ function getTasksCount(loc, param) {
  * greet the user different, depending on daytime.
  */
 function greeting() {
-    console.log('greeting');
-    // debugger
     greetingIsLoaded = localStorage.getItem('greetingLoaded');
     document.getElementById("greetingContainer").innerHTML = getDayTime();
     if (window.innerWidth < 1201 && greetingIsLoaded == 'false') {

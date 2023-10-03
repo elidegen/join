@@ -25,7 +25,7 @@ let newTaskStatus = null;
 let formValidatorActive = 0;
 let guest = {
     name: "Guest",
-    email: "guest",
+    email: "guest@guest.com",
     password: "",
     contacts: contactList
 };

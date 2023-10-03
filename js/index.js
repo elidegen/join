@@ -52,11 +52,12 @@ function checkMsg() {
     const msg = urlParams.get('msg');
     if (msg == 'success') {
         document.getElementById('msg').innerHTML = 'You have registered successfully!';
+        successMsg();
     }
     if (msg == 'successPW') {
         document.getElementById('msg').innerHTML = 'Your password has been successfully changed!';
+        successMsg();
     }
-    successMsg();
 }
 
 /**
