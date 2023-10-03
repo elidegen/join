@@ -43,8 +43,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $message = "Hello, \n
         \nFollow this link to reset your JOIN password for your " . $email . " account. \n
-        \nhttps://elijah-degen.developerakademie.net/resetPassword.html?email=" . $email . "\n
-        \nIf you didnt ask to reset your password, you can ignore this email. \n
+        \nhttps://elijah-degen.developerakademie.net/html/resetPassword.html?email=" . $email . "\n
+        \nIf you didn't ask to reset your password, you can ignore this email. \n
         \nThanks, \n
         \nYour Join Team\n";
         

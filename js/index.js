@@ -75,6 +75,58 @@ async function addUser() {
 }
 
 /**
+ * Validates the input fields for adding a new user.
+ * @returns {boolean} True if all input fields are valid, false otherwise.
+ */
+function validateAddUser() {
+    return validateUsername(document.getElementById('name').value) &&
+        validateEmail(email.value) &&
+        validatePassword(password.value);
+}
+
+/**
+ * validates if username consist of a single word with letters and numbers
+ */
+function validateUsername(username) {
+    const regex = /^[a-zA-Z0-9]+$/;
+    return regex.test(username.trim());
+}
+
+/**
+ * Validates an email address using a regular expression.
+ */
+function validateEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+/**
+ * Validates a password if it contains at least 8 characters including a special character
+ */
+function validatePassword(password) {
+    const passwordRegex = /^(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    return passwordRegex.test(password);
+}
+
+/**
+ * Generates a new user and adds it to the system.
+ */
+async function generateUser() {
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    users.push(createUser(name, email, password));
+    await backend.setItem('users', JSON.stringify(users));
+}
+
+/**
+ * Redirects the user to the index page with a success message.
+ */
+function createUserSuccess() {
+    window.location.href = 'index.html?msg=success';
+}
+
+/**
  * Displays an error message for creating a user with an invalid password.
  * @param {string} password - The invalid password.
  */
@@ -97,24 +149,6 @@ function createUserError() {
 }
 
 /**
- * Redirects the user to the index page with a success message.
- */
-function createUserSuccess() {
-    window.location.href = 'index.html?msg=success';
-}
-
-/**
- * Generates a new user and adds it to the system.
- */
-async function generateUser() {
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    users.push(createUser(name, email, password));
-    await backend.setItem('users', JSON.stringify(users));
-}
-
-/**
  * Creates a new user object.
  * @returns {Object} A new user object.
  */
@@ -124,16 +158,6 @@ function createUser(name, email, password) {
         email: email.value,
         password: password.value,
     };
-}
-
-/**
- * Validates the input fields for adding a new user.
- * @returns {boolean} True if all input fields are valid, false otherwise.
- */
-function validateAddUser() {
-    return validateUsername(document.getElementById('name').value) &&
-        validateEmail(email.value) &&
-        validatePassword(password.value);
 }
 
 /**
@@ -187,50 +211,33 @@ async function guestLogin() {
     redirectToSummary();
 }
 
-/**
- * Handles the form submission event.
- * @param {Event} event - The form submission event.
- */
-// async function onSubmit(event) {
-//     if (!validateEmail(email.value)) {
-//         document.getElementById('wrongEmail').innerText = "Please enter a valid E-Mail Adress!";
-//     } else {
-//         document.getElementById('wrongEmail').innerText = "";
-//         event.preventDefault();
-//         await getUserData();
-//         let formData = new FormData(event.target);
-//         let response = await sendMail(formData); //formdata ist vermutlich nur das input feld der emailadresse
-//         checkIfUserExists(response);
-//     }
-// }
-
-// // Sends the password reset email
-// function sendMail(formData) {
-//     const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
-//     const requestInit = {
-//         method: 'post',
-//         body: formData
-//     };
-//     return fetch(input, requestInit);
-// }
-
-// Sends a password reset email if the user exists
+// validates email and sends passwort forgot email
 async function onSubmit(event) {
-    event.preventDefault();
-    await getUserData();
-    let mailValue = document.getElementById('email').value;
-    let response = await action({ "email": mailValue });
-    checkIfUserExists(response);
+    if (!validateEmail(email.value)) {
+        document.getElementById('wrongEmail').innerText = "Please enter a valid E-Mail Adress!";
+    } else {
+        document.getElementById('wrongEmail').innerText = "";
+        event.preventDefault();
+        await getUserData();
+        if (checkIfUserExists()) {
+            let formData = new FormData(event.target);
+            sendMail(formData);
+        }
+    }
 }
 
 // Sends the password reset email
-function action(formData) {
+function sendMail(formData) {
     const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
     const requestInit = {
         method: 'post',
         body: formData
     };
-    return fetch(input, requestInit);
+
+    return fetch(
+        input,
+        requestInit
+    );
 }
 
 /**
@@ -243,9 +250,11 @@ function checkIfUserExists() {
         localStorage.setItem('user', JSON.stringify(user));
         deletePopUp(999);
         document.getElementById('confirmationPopUp').innerHTML = 'An E-Mail has been sent to you';
+        return true;
     } else {
         deletePopUp(999);
         document.getElementById('confirmationPopUp').innerHTML = 'No user registered with this email';
+        return false;
     }
 }
 
@@ -365,37 +374,6 @@ function arePasswordsMatching(password, confirmPassword) {
 function setRememberMe() {
     localStorage.setItem('currentUser-email', currentUser.email);
     localStorage.setItem('currentUser-password', currentUser.password);
-}
-
-/**
- * Validates the username to ensure it contains only alphabetic characters and an optional space.
- * @param {string} username - The username to be validated.
- * @returns {boolean} - True if the username is valid, false otherwise.
- */
-function validateUsername(username) {
-    const regex = /^[a-zA-Z]+([a-zA-Z]+\s*)?$/;
-    return regex.test(username.trim());
-}
-
-/**
- * Validates an email address using a regular expression.
- * @param {string} email - The email address to be validated.
- * @returns {boolean} - True if the email address is valid, false otherwise.
- */
-function validateEmail(email) {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-}
-
-/**
- * Validates a password using a regular expression.
- * @param {string} password - The password to be validated.
- * @returns {boolean} - True if the password is valid, false otherwise.
- */
-function validatePassword(password) {
-    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-    const passwordRegex = /^(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-    return passwordRegex.test(password);
 }
 
 // Function to render the password reset page.

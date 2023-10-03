@@ -553,12 +553,12 @@ function generateCategoryHTML(i) {
 
 function forgotPwHTML() {
     return /*html*/`
-        <form class="login" id="login" onsubmit="onSubmit(event);false">
+        <form class="login" id="login" onsubmit="onSubmit(event);return false">
             <h1>I forgot my password</h1>
             <p class="forgotPWText">Don't worry! We will send you an email with the instructions to reset your password.</p>
             <div class="loginFields">
                 <div class="globalInput">
-                    <input id="email" type="email" placeholder="E-Mail"> <img src="../img/emailIcon.png">
+                    <input id="email" name="email" placeholder="E-Mail"> <img src="../img/emailIcon.png">
                 </div>
                 <div id="wrongEmail" class="wrongLogin"></div>
             </div>
