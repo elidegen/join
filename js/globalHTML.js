@@ -522,14 +522,14 @@ function forgotPwHTML() {
             <p class="forgotPWText">Don't worry! We will send you an email with the instructions to reset your password.</p>
             <div class="loginFields">
                 <div class="globalInput">
-                    <input id="email" name="email" placeholder="E-Mail"> <img src="../img/emailIcon.png">
+                    <input id="email" name="email" placeholder="E-Mail"> <img src="../join/img/emailIcon.png">
                 </div>
                 <div id="wrongEmail" class="wrongLogin"></div>
             </div>
             <button class="buttonGlobal1" type="submit">
                 <p>Send me the E-Mail</p>
             </button>
-            <a href="../index.html" class="backBtn"><img src="../img/arrowBack.png"></a>
+            <a href="../join/index.html" class="backBtn"><img src="../join/img/arrowBack.png"></a>
         </form>
         <div id="deleteBackground" class="d-none">
         <div class="deletePopup">

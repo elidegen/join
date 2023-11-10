@@ -240,7 +240,7 @@ async function onSubmit(event) {
 
 // Sends the password reset email
 function sendMail(formData) {
-    const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
+    const input = 'https://elijah-degen.developerakademie.net/join/send_mail.php';
     const requestInit = {
         method: 'post',
         body: formData
