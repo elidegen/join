@@ -361,12 +361,12 @@ function renderSignUp() {
  * Redirects the user to the summary page.
  */
 function redirectToSummary() {
-    window.location.href = '../html/summary.html';
+    window.location.href = '../join/html/summary.html';
 }
 
 /**
  * Redirects the user to the index page.
  */
 function redirectToIndex() {
-    window.location.href = '../index.html?msg=successPW';
+    window.location.href = '../join/index.html?msg=successPW';
 }

@@ -503,42 +503,6 @@ function displayContactHTML() {
     `;
 }
 
-/**
- * this function returns the html code to load the overlay edit contact 
- * @param {i} 
- * @param {contactList} 
- * @param {firstNameInitial} 
- * @param {lastNameInitial} 
- * @returns HTML code for the overlay edit contact
- */
-// function generateoverlayEditContactHTML(i, contactList, firstNameInitial, lastNameInitial) {
-//     return /*html*/`
-//     <div class="overlayContact" id="overlayEditContact">
-//         <div class="autoLayoutEdit">
-//             <img src="/img/logoLight.svg" class="logoEdit">
-//             <span class="overlayTextEdit">Edit Contact</span>
-//             <span class="overlayborderEdit"></span>
-//         </div>
-//         <img src="/img/whiteCross.png" class="closeOverlayWhite" onclick="closeOverlay()">
-//         <img src="/img/darkCross.png" class="closeOverlayEdit" onclick="closeOverlay()">
-//         <div class="logoOverlayEdit" style="background-color: ${contactList[i]['userColor']}">
-//             <div class="initialsOverlay">${firstNameInitial}${lastNameInitial}</div>
-//         </div>
-//         <div class="inputContainerEdit">
-//             <div>
-//                 <input id="nameEdit"  type="text" class="overlayInput" placeholder="Name">
-//                             <span class="formValidate" id="validateNameEdit"></span>
-//                 <input id="emailEdit"  type="email" class="overlayInput" placeholder="Email">
-//                             <span class="formValidate" id="validateEmailEdit"></span>
-//                 <input id="telEdit" type="number" class="overlayInput" placeholder="Phone">
-//                             <span class="formValidate" id="validatePhoneEdit"></span>
-//             </div>
-//         </div>
-//         <button onclick="saveEditContact(${i})"class="editContactSave buttonGlobal1">Save</button>
-//     </div>
-//     `;
-// }
-
 function generateCategoryHTML(i) {
     return /*html*/`
     <a onclick="chooseCategory('${i}')">
@@ -584,22 +548,22 @@ function signUpHTML() {
             <h1>Sign up</h1>
             <div class="loginFields">
                 <div class="globalInput">
-                    <input id="name" type="text" placeholder="Username"> <img src="../img/nameIcon.png">
+                    <input id="name" type="text" placeholder="Username"> <img src="../join/img/nameIcon.png">
                 </div>
                 <div id="wrongName" class="wrongLogin"></div>
                 <div class="globalInput">
-                    <input id="email" type="email" placeholder="E-Mail"> <img src="../img/emailIcon.png">
+                    <input id="email" type="email" placeholder="E-Mail"> <img src="../join/img/emailIcon.png">
                 </div>
                 <div id="wrongEmail" class="wrongLogin"></div>
                 <div class="globalInput">
-                    <input id="password" placeholder="Password" type="password"> <img src="../img/passwordIcon.png">
+                    <input id="password" placeholder="Password" type="password"> <img src="../join/img/passwordIcon.png">
                 </div>
                 <div id="wrongPassword" class="wrongLogin"></div>
             </div>
             <div class="buttonGlobal1" onclick="addUser()">
                 <p>Sign up</p>
             </div>
-        <a href="../index.html" class="backBtn"><img src="../img/arrowBack.png"></a>
+        <a href="../join/index.html" class="backBtn"><img src="../join/img/arrowBack.png"></a>
         </div>
     `;
 }
