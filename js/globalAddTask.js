@@ -81,7 +81,7 @@ async function openPopup(status) {
         await setUserContacts();
     }
     else {
-        window.location.replace("/html/addtask.html");
+        window.location.replace("/join/html/addtask.html");
     }
 }
 
@@ -114,7 +114,7 @@ async function createTask() {
  * will redirect user after creating a task to the board page
  */
 function redirect() {
-    if (window.location['pathname'] == '/html/addtask.html' || window.location['pathname'] == '/html/contact.html') {
+    if (window.location['pathname'] == '/join/html/addtask.html' || window.location['pathname'] == '/join/html/contact.html') {
         window.location.href = "../html/board.html";
     }
     else {
