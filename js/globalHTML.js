@@ -522,14 +522,14 @@ function forgotPwHTML() {
             <p class="forgotPWText">Don't worry! We will send you an email with the instructions to reset your password.</p>
             <div class="loginFields">
                 <div class="globalInput">
-                    <input id="email" name="email" placeholder="E-Mail"> <img src="../join/img/emailIcon.png">
+                    <input id="email" name="email" placeholder="E-Mail"> <img src="../img/emailIcon.png">
                 </div>
                 <div id="wrongEmail" class="wrongLogin"></div>
             </div>
             <button class="buttonGlobal1" type="submit">
                 <p>Send me the E-Mail</p>
             </button>
-            <a href="../join/index.html" class="backBtn"><img src="../join/img/arrowBack.png"></a>
+            <a href="../index.html" class="backBtn"><img src="../img/arrowBack.png"></a>
         </form>
         <div id="deleteBackground" class="d-none">
         <div class="deletePopup">
@@ -548,22 +548,22 @@ function signUpHTML() {
             <h1>Sign up</h1>
             <div class="loginFields">
                 <div class="globalInput">
-                    <input id="name" type="text" placeholder="Username"> <img src="../join/img/nameIcon.png">
+                    <input id="name" type="text" placeholder="Username"> <img src="../img/nameIcon.png">
                 </div>
                 <div id="wrongName" class="wrongLogin"></div>
                 <div class="globalInput">
-                    <input id="email" type="email" placeholder="E-Mail"> <img src="../join/img/emailIcon.png">
+                    <input id="email" type="email" placeholder="E-Mail"> <img src="../img/emailIcon.png">
                 </div>
                 <div id="wrongEmail" class="wrongLogin"></div>
                 <div class="globalInput">
-                    <input id="password" placeholder="Password" type="password"> <img src="../join/img/passwordIcon.png">
+                    <input id="password" placeholder="Password" type="password"> <img src="../img/passwordIcon.png">
                 </div>
                 <div id="wrongPassword" class="wrongLogin"></div>
             </div>
             <div class="buttonGlobal1" onclick="addUser()">
                 <p>Sign up</p>
             </div>
-        <a href="../join/index.html" class="backBtn"><img src="../join/img/arrowBack.png"></a>
+        <a href="../index.html" class="backBtn"><img src="../img/arrowBack.png"></a>
         </div>
     `;
 }

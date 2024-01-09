@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 30px;
     position: relative;
 }
 
@@ -31,7 +33,6 @@ h1 {
     display: flex;
     align-items: center;
     gap: 30px;
-    margin: 50px;
 }
 
 .summaryContent {
@@ -197,9 +198,19 @@ h1 {
     }
 }
 
-@media(max-width: 530px) {
+@media(max-width: 530px) or (max-height: 780px) {
+    .body {
+        gap: 10px;
+    }
+}
+
+@media(max-width: 530px) or (max-height: 780px) {
     .headerSummary {
-        margin: 20px;
+        margin: 10px;
+    }
+
+    .headerSummary h1 {
+        font-size: 45px;
     }
 
     .tasks {
@@ -234,6 +245,7 @@ h1 {
     .soloTask {
         padding: 20px 15px;
     }
+
     .soloTask:hover {
         transform: scale(1.05);
     }

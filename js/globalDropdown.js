@@ -91,7 +91,7 @@ async function chooseCategory(i) {
     document.getElementById('dropbtnCategory').innerHTML = categories[i]['name'] + `<div class="categoryColor" style="background-color: ${categories[i]['color']}"></div>`;
     currentCategory = i;
     let currentPage = window.location['pathname'];
-    if (currentPage == '/join/html/addtask.html') {
+    if (currentPage == '/html/addtask.html') {
         document.getElementById('myDropdownATP').classList.add('d-none');
     }
     closeAllDropdownsExcept();
@@ -137,7 +137,7 @@ async function setBackend() {
  */
 async function renderCategorys() {
     await getBackend();
-    if (window.location['pathname'] == '/join/html/addtask.html') {
+    if (window.location['pathname'] == '/html/addtask.html') {
         id = 'myDropdownATP';
     }
     else {

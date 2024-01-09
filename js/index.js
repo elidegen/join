@@ -240,7 +240,7 @@ async function onSubmit(event) {
 
 // Sends the password reset email
 function sendMail(formData) {
-    const input = 'https://elijah-degen.developerakademie.net/join/send_mail.php';
+    const input = 'https://elijah-degen.developerakademie.net/send_mail.php';
     const requestInit = {
         method: 'post',
         body: formData
@@ -361,12 +361,12 @@ function renderSignUp() {
  * Redirects the user to the summary page.
  */
 function redirectToSummary() {
-    window.location.href = '../join/html/summary.html';
+    window.location.href = '../html/summary.html';
 }
 
 /**
  * Redirects the user to the index page.
  */
 function redirectToIndex() {
-    window.location.href = '../join/index.html?msg=successPW';
+    window.location.href = '../index.html?msg=successPW';
 }
