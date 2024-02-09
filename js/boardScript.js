@@ -146,15 +146,7 @@ function unHoverDrop(id) {
  * @param {number} i index of task
  */
 function tilt(i) {
-    document.getElementById(`task${i}`).classList.add('tilt');
-}
-
-/**
- * this function will untilt the task upon drop
- * @param {number} i index of task
- */
-function unTilt(i) {
-    document.getElementById(`task${i}`).classList.remove('tilt');
+    document.getElementById(`task${i}`).classList.toggle('tilt');
 }
 
 /**

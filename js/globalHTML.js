@@ -114,7 +114,7 @@ function renderPopup() {
  */
 function generateTaskHTML(i) {
     return /*html */`
-        <div draggable="true" onclick="openTask(${i})" ondragstart="startDragging(${i}), tilt(${i})" ondragend="unTilt(${i})" class="todoBox" id="task${i}">
+        <div draggable="true" onclick="openTask(${i})" ondragstart="startDragging(${i}), tilt(${i})" ondragend="tilt(${i})" class="todoBox" id="task${i}">
             <p class="category" id="category${i}">${tasks[i]['category']['name']}</p>
             <h4>${tasks[i]['title']}</h4>
             <p class="taskDescription">${tasks[i]['description']}</p>
