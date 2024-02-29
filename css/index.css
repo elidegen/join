@@ -46,7 +46,6 @@ p {
     right: 0;
     bottom: 0;
     background-color: #f6f7f8;
-    /*#f6f7f8;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,13 +212,19 @@ h1::after {
 
 @media(max-width: 500px) {
     .signUp {
-        top: unset;
+        position: unset;
+        /* top: unset;
         bottom: 30px;
         left: 30px;
         right: 30px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-between; */
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 30px;
     }
 
     #animationOverlay {
@@ -262,7 +267,8 @@ h1::after {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-image: url("../img/logoLight.svg");;
+            background-image: url("../img/logoLight.svg");
+            ;
         }
 
         30% {
@@ -282,8 +288,9 @@ h1::after {
 }
 
 @media(max-height: 700px) {
-    .login {
-        gap: 20px;
+    #joinLogo {
+        opacity: 0;
+        transition: all 2500ms;
     }
 }
 
